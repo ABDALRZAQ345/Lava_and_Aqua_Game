@@ -1,6 +1,7 @@
-!/.venv/
-!/Lava and Aqua.spec
-!/main.spec
-!/build/
-!/dist/backup.txt
-!/dist/
+/.venv/
+/Lava and Aqua.spec
+/main.spec
+/build/
+/dist/backup.txt
+/dist/
+/idea/
