@@ -143,7 +143,7 @@ Key methods:
 ![Level Example](images/gameCaptures/img_1.png)
 ![Level Example](images/gameCaptures/img_2.png)
 ![Game Win](images/gameCaptures/img_3.png)
-
+![Game Lose ](images/gameCaptures/lose.png)
 
 
 ---
