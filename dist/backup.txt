@@ -1,0 +1,271 @@
+import pygame
+from Goal import Goal
+from Ground import Ground
+from Key import Key
+from LavaBlock import LavaBlock
+from NumericBlock import NumericBlock
+from block import Block
+from lava import Lava
+from player import Player
+from wall import Wall
+from water import Aqua
+class Board:
+    def __init__(self, filename=None):
+        self.grid = None
+        self.keys = []
+        self.tile_size = 75
+        self.width = 0
+        self.height = 0
+        self.player = None
+        self.goal = None
+        self.GameStatus = "Running"
+        if filename:
+            self.load_from_file(filename)
+
+    def load_from_file(self, filename):
+        with open(filename, 'r') as f:
+            lines = [line.strip() for line in f.readlines() if line.strip()]
+            self.height = len(lines)
+            self.width = max(len(line.split(',')) for line in lines)
+            self.grid = [[None for _ in range(self.width)] for _ in range(self.height)]
+        for y, line in enumerate(lines):
+            cells = [c.strip() for c in line.split(',')]
+            for x, ch in enumerate(cells):
+                obj = None
+                if ch == '#':
+                    obj = Wall(x, y)
+                elif ch == 'L':
+                    obj = Lava(x, y)
+                elif ch == 'A':
+                    obj = Aqua(x, y)
+                elif ch == 'G':
+                    self.goal = Goal(x, y)
+                elif ch == '.':
+                    obj = Ground(x, y)
+                elif ch == 'P':
+                    obj = Ground(x, y)
+                    self.player = Player(x, y)
+                elif ch == 'S':
+                    obj = Block(x, y)
+                elif ch == "H":
+                    obj = LavaBlock(x, y)
+                elif ch == "K":
+                    obj = Ground(x, y)
+                    self.keys.append(Key(x, y))
+                elif ch.isdigit():
+                    obj = NumericBlock(x, y, int(ch))
+                else:
+                    obj = Ground(x, y)
+                self.grid[y][x] = obj
+
+    def clone(self):
+        new_board = Board.__new__(Board)
+
+        new_board.width = self.width
+        new_board.height = self.height
+        new_board.tile_size = self.tile_size
+        new_board.GameStatus = self.GameStatus
+        new_board.player = Player(self.player.x, self.player.y)
+        new_board.goal = Goal(self.goal.x, self.goal.y) if self.goal else None
+        new_board.keys = [Key(k.x, k.y) for k in self.keys]
+        new_grid = [[None for _ in range(self.width)] for _ in range(self.height)]
+
+        for y in range(self.height):
+            for x in range(self.width):
+                obj = self.grid[y][x]
+                if obj is None:
+                    new_obj = None
+                elif isinstance(obj, Wall):
+                    new_obj = Wall(x, y)
+                elif isinstance(obj, Ground):
+                    new_obj = Ground(x, y)
+                elif isinstance(obj, Lava):
+                    new_obj = Lava(x, y)
+                elif isinstance(obj, Aqua):
+                    new_obj = Aqua(x, y)
+                elif isinstance(obj, Block):
+                    new_obj = Block(x, y)
+                elif isinstance(obj, LavaBlock):
+                    new_obj = LavaBlock(x, y, obj.withLava, obj.withWater)
+                elif isinstance(obj, NumericBlock):
+                    new_obj = NumericBlock(x, y, obj.value)
+                else:
+                    new_obj = Ground(x, y)
+
+                new_grid[y][x] = new_obj
+
+        new_board.grid = new_grid
+
+        return new_board
+
+    def get_object_at(self, x, y):
+        return self.grid[y][x]
+
+    def handle_input(self, key):
+        move_map = {
+            pygame.K_LEFT: (-1, 0),
+            pygame.K_a: (-1, 0),
+            pygame.K_RIGHT: (1, 0),
+            pygame.K_d: (1, 0),
+            pygame.K_UP: (0, -1),
+            pygame.K_w: (0, -1),
+            pygame.K_DOWN: (0, 1),
+            pygame.K_s: (0, 1),
+        }
+
+        if key not in move_map:
+            return False
+
+        dx, dy = move_map[key]
+        new_x, new_y = self.player.x + dx, self.player.y + dy
+
+        if not (0 <= new_x < self.width and 0 <= new_y < self.height):
+            return False
+
+        target = self.get_object_at(new_x, new_y)
+
+        if isinstance(target, (Wall, LavaBlock, NumericBlock)):
+            return False
+
+        if isinstance(target, Block):
+            push_x = new_x + dx
+            push_y = new_y + dy
+            if 0 <= push_x < self.width and 0 <= push_y < self.height and not isinstance(
+                    self.get_object_at(push_x, push_y), (Wall, Block, LavaBlock, NumericBlock)):
+                self.grid[push_y][push_x] = Block(push_x, push_y)
+                self.grid[new_y][new_x] = Ground(new_x, new_y)
+            else:
+                return False
+
+        self.player.x, self.player.y = new_x, new_y
+
+
+        self.updatelavandwater()
+        self.updateNumericBlocks()
+        self.collect_keys()
+        self.game_status()
+        return  True
+    def game_status(self):
+        if self.goal.x == self.player.x and self.player.y == self.goal.y and len(self.keys) == 0:
+            self.GameStatus = "won"
+        if isinstance(self.get_object_at(self.player.x, self.player.y), (Lava, Wall)):
+            self.GameStatus = "lose"
+            self.player.dead()
+
+    def collect_keys(self):
+        for key in self.keys[:]:
+            if key.x == self.player.x and key.y == self.player.y:
+                self.keys.remove(key)
+
+    def updateNumericBlocks(self):
+        for y in range(self.height):
+            for x in range(self.width):
+                obj = self.grid[y][x]
+                if isinstance(obj, NumericBlock):
+                    new_obj = obj.decrease()
+                    self.grid[y][x] = new_obj
+
+    def draw(self, screen):
+        board_pixel_width = self.width * self.tile_size
+        board_pixel_height = self.height * self.tile_size
+
+        offset_x = (screen.get_width() - board_pixel_width) // 2
+        offset_y = (screen.get_height() - board_pixel_height) // 2
+        if self.goal:
+            self.goal.draw(screen, self.tile_size, offset=(offset_x, offset_y))
+        for y in range(self.height):
+            for x in range(self.width):
+                obj = self.grid[y][x]
+                if obj:
+                    obj.draw(screen, self.tile_size, offset=(offset_x, offset_y))
+        for key in self.keys:
+            key.draw(screen, self.tile_size, offset=(offset_x, offset_y))
+        if self.player:
+            self.player.draw(screen, self.tile_size, offset=(offset_x, offset_y))
+
+    def updatelavandwater(self):
+
+        new_grid = [[self.grid[y][x] for x in range(self.width)] for y in range(self.height)]
+
+        for y in range(self.height):
+            for x in range(self.width):
+                obj = self.grid[y][x]
+                if isinstance(obj, Aqua) or (isinstance(obj, LavaBlock)and obj.withWater):
+                    for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+                        nx, ny = x + dx, y + dy
+                        if 0 <= nx < self.width and 0 <= ny < self.height:
+                            target = new_grid[ny][nx]
+
+                            if isinstance(target, Lava):
+                                new_grid[ny][nx] = Wall(nx, ny)
+
+                            elif isinstance(target, Ground):
+                                new_grid[ny][nx] = Aqua(nx, ny)
+                            elif isinstance(target, LavaBlock):
+                                new_grid[ny][nx] = LavaBlock(nx, ny,False,True)
+        last_grid = [[new_grid[y][x] for x in range(self.width)] for y in range(self.height)]
+        for y in range(self.height):
+            for x in range(self.width):
+                obj = new_grid[y][x]
+                if isinstance(obj, Lava) or (isinstance(obj, LavaBlock)and obj.withLava):
+                    for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+                        nx, ny = x + dx, y + dy
+                        if 0 <= nx < self.width and 0 <= ny < self.height:
+                            target = new_grid[ny][nx]
+                            if isinstance(target, Aqua):
+                                last_grid[ny][nx] = Wall(nx, ny)
+
+                            elif isinstance(target, Ground) :
+                                last_grid[ny][nx] = Lava(nx, ny)
+                            elif isinstance(target, LavaBlock):
+                                last_grid[ny][nx] = LavaBlock(nx, ny,True)
+        self.grid = last_grid
+
+    def check_can_move(self, key):
+        move_map = {
+            "left": (-1, 0),
+            "right": (1, 0),
+            "up": (0, -1),
+            "down": (0, 1),
+        }
+
+        if key not in move_map:
+            return False
+
+        dx, dy = move_map[key]
+        new_x, new_y = self.player.x + dx, self.player.y + dy
+        if not (0 <= new_x < self.width and 0 <= new_y < self.height):
+            return False
+
+        target = self.get_object_at(new_x, new_y)
+
+        if isinstance(target, (Wall, LavaBlock, NumericBlock)):
+            return False
+
+        if isinstance(target, Block):
+            push_x = new_x + dx
+            push_y = new_y + dy
+            if not (0 <= push_x < self.width and 0 <= push_y < self.height):
+                return False
+            push_target = self.get_object_at(push_x, push_y)
+            if isinstance(push_target, (Wall, Block, LavaBlock, NumericBlock)):
+                return False
+
+        return True
+
+    def get_available_moves(self):
+
+        moves = []
+        key_map = [
+            "left",
+            "right",
+            "up",
+            "down"
+        ]
+
+        for key in key_map:
+            if self.check_can_move(key):
+                moves.append(key)
+
+        return moves
+
