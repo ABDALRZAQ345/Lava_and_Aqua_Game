@@ -1,0 +1,564 @@
+('C:\\Users\\abd alrzaq\\PycharmProjects\\PythonProject\\v2\\dist\\Lava and '
+ 'Aqua.exe',
+ False,
+ False,
+ False,
+ ['C:\\Users\\abd '
+  'alrzaq\\PycharmProjects\\PythonProject\\v2\\images\\play.png'],
+ None,
+ False,
+ False,
+ b'<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<assembly xmlns='
+ b'"urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">\n  <trustInfo x'
+ b'mlns="urn:schemas-microsoft-com:asm.v3">\n    <security>\n      <requested'
+ b'Privileges>\n        <requestedExecutionLevel level="asInvoker" uiAccess='
+ b'"false"/>\n      </requestedPrivileges>\n    </security>\n  </trustInfo>\n  '
+ b'<compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">\n    <'
+ b'application>\n      <supportedOS Id="{e2011457-1546-43c5-a5fe-008deee3d3f'
+ b'0}"/>\n      <supportedOS Id="{35138b9a-5d96-4fbd-8e2d-a2440225f93a}"/>\n '
+ b'     <supportedOS Id="{4a2f28e3-53b9-4441-ba9c-d69d4a4a6e38}"/>\n      <s'
+ b'upportedOS Id="{1f676c76-80e1-4239-95bb-83d0f6d0da78}"/>\n      <supporte'
+ b'dOS Id="{8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}"/>\n    </application>\n  <'
+ b'/compatibility>\n  <application xmlns="urn:schemas-microsoft-com:asm.v3">'
+ b'\n    <windowsSettings>\n      <longPathAware xmlns="http://schemas.micros'
+ b'oft.com/SMI/2016/WindowsSettings">true</longPathAware>\n    </windowsSett'
+ b'ings>\n  </application>\n  <dependency>\n    <dependentAssembly>\n      <ass'
+ b'emblyIdentity type="win32" name="Microsoft.Windows.Common-Controls" version='
+ b'"6.0.0.0" processorArchitecture="*" publicKeyToken="6595b64144ccf1df" langua'
+ b'ge="*"/>\n    </dependentAssembly>\n  </dependency>\n</assembly>',
+ True,
+ False,
+ None,
+ None,
+ None,
+ 'C:\\Users\\abd alrzaq\\PycharmProjects\\PythonProject\\v2\\build\\Lava and '
+ 'Aqua\\Lava and Aqua.pkg',
+ [('pyi-contents-directory _internal', '', 'OPTION'),
+  ('PYZ-00.pyz',
+   'C:\\Users\\abd alrzaq\\PycharmProjects\\PythonProject\\v2\\build\\Lava and '
+   'Aqua\\PYZ-00.pyz',
+   'PYZ'),
+  ('struct',
+   'C:\\Users\\abd alrzaq\\PycharmProjects\\PythonProject\\v2\\build\\Lava and '
+   'Aqua\\localpycs\\struct.pyc',
+   'PYMODULE'),
+  ('pyimod01_archive',
+   'C:\\Users\\abd alrzaq\\PycharmProjects\\PythonProject\\v2\\build\\Lava and '
+   'Aqua\\localpycs\\pyimod01_archive.pyc',
+   'PYMODULE'),
+  ('pyimod02_importers',
+   'C:\\Users\\abd alrzaq\\PycharmProjects\\PythonProject\\v2\\build\\Lava and '
+   'Aqua\\localpycs\\pyimod02_importers.pyc',
+   'PYMODULE'),
+  ('pyimod03_ctypes',
+   'C:\\Users\\abd alrzaq\\PycharmProjects\\PythonProject\\v2\\build\\Lava and '
+   'Aqua\\localpycs\\pyimod03_ctypes.pyc',
+   'PYMODULE'),
+  ('pyimod04_pywin32',
+   'C:\\Users\\abd alrzaq\\PycharmProjects\\PythonProject\\v2\\build\\Lava and '
+   'Aqua\\localpycs\\pyimod04_pywin32.pyc',
+   'PYMODULE'),
+  ('pyiboot01_bootstrap',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\PyInstaller\\loader\\pyiboot01_bootstrap.py',
+   'PYSOURCE'),
+  ('pyi_rth_inspect',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_inspect.py',
+   'PYSOURCE'),
+  ('pyi_rth_pkgres',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_pkgres.py',
+   'PYSOURCE'),
+  ('pyi_rth_setuptools',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_setuptools.py',
+   'PYSOURCE'),
+  ('pyi_rth_multiprocessing',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_multiprocessing.py',
+   'PYSOURCE'),
+  ('pyi_rth_pkgutil',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_pkgutil.py',
+   'PYSOURCE'),
+  ('main',
+   'C:\\Users\\abd alrzaq\\PycharmProjects\\PythonProject\\v2\\main.py',
+   'PYSOURCE'),
+  ('python310.dll',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\\python310.dll',
+   'BINARY'),
+  ('portmidi.dll',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\portmidi.dll',
+   'BINARY'),
+  ('SDL2.dll',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\SDL2.dll',
+   'BINARY'),
+  ('SDL2_image.dll',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\SDL2_image.dll',
+   'BINARY'),
+  ('libmodplug-1.dll',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\libmodplug-1.dll',
+   'BINARY'),
+  ('libtiff-5.dll',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\libtiff-5.dll',
+   'BINARY'),
+  ('libogg-0.dll',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\libogg-0.dll',
+   'BINARY'),
+  ('libopus-0.dll',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\libopus-0.dll',
+   'BINARY'),
+  ('SDL2_ttf.dll',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\SDL2_ttf.dll',
+   'BINARY'),
+  ('libopusfile-0.dll',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\libopusfile-0.dll',
+   'BINARY'),
+  ('libpng16-16.dll',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\libpng16-16.dll',
+   'BINARY'),
+  ('zlib1.dll',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\zlib1.dll',
+   'BINARY'),
+  ('SDL2_mixer.dll',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\SDL2_mixer.dll',
+   'BINARY'),
+  ('freetype.dll',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\freetype.dll',
+   'BINARY'),
+  ('libjpeg-9.dll',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\libjpeg-9.dll',
+   'BINARY'),
+  ('libwebp-7.dll',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\libwebp-7.dll',
+   'BINARY'),
+  ('_lzma.pyd',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\\DLLs\\_lzma.pyd',
+   'EXTENSION'),
+  ('_bz2.pyd',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\\DLLs\\_bz2.pyd',
+   'EXTENSION'),
+  ('unicodedata.pyd',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\\DLLs\\unicodedata.pyd',
+   'EXTENSION'),
+  ('select.pyd',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\\DLLs\\select.pyd',
+   'EXTENSION'),
+  ('_socket.pyd',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\\DLLs\\_socket.pyd',
+   'EXTENSION'),
+  ('_multiprocessing.pyd',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\\DLLs\\_multiprocessing.pyd',
+   'EXTENSION'),
+  ('pyexpat.pyd',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\\DLLs\\pyexpat.pyd',
+   'EXTENSION'),
+  ('_ssl.pyd',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\\DLLs\\_ssl.pyd',
+   'EXTENSION'),
+  ('_hashlib.pyd',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\\DLLs\\_hashlib.pyd',
+   'EXTENSION'),
+  ('_decimal.pyd',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\\DLLs\\_decimal.pyd',
+   'EXTENSION'),
+  ('_ctypes.pyd',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\\DLLs\\_ctypes.pyd',
+   'EXTENSION'),
+  ('_queue.pyd',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\\DLLs\\_queue.pyd',
+   'EXTENSION'),
+  ('_overlapped.pyd',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\\DLLs\\_overlapped.pyd',
+   'EXTENSION'),
+  ('_asyncio.pyd',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\\DLLs\\_asyncio.pyd',
+   'EXTENSION'),
+  ('pygame\\imageext.cp310-win_amd64.pyd',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\imageext.cp310-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\scrap.cp310-win_amd64.pyd',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\scrap.cp310-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\mixer.cp310-win_amd64.pyd',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\mixer.cp310-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\mixer_music.cp310-win_amd64.pyd',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\mixer_music.cp310-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\font.cp310-win_amd64.pyd',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\font.cp310-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\_freetype.cp310-win_amd64.pyd',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\_freetype.cp310-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\transform.cp310-win_amd64.pyd',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\transform.cp310-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\time.cp310-win_amd64.pyd',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\time.cp310-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\pixelarray.cp310-win_amd64.pyd',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\pixelarray.cp310-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\mask.cp310-win_amd64.pyd',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\mask.cp310-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\surface.cp310-win_amd64.pyd',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\surface.cp310-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\pixelcopy.cp310-win_amd64.pyd',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\pixelcopy.cp310-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\mouse.cp310-win_amd64.pyd',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\mouse.cp310-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\key.cp310-win_amd64.pyd',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\key.cp310-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\joystick.cp310-win_amd64.pyd',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\joystick.cp310-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\image.cp310-win_amd64.pyd',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\image.cp310-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\event.cp310-win_amd64.pyd',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\event.cp310-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\draw.cp310-win_amd64.pyd',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\draw.cp310-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\display.cp310-win_amd64.pyd',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\display.cp310-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\math.cp310-win_amd64.pyd',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\math.cp310-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\bufferproxy.cp310-win_amd64.pyd',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\bufferproxy.cp310-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\color.cp310-win_amd64.pyd',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\color.cp310-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\surflock.cp310-win_amd64.pyd',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\surflock.cp310-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\rwobject.cp310-win_amd64.pyd',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\rwobject.cp310-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\rect.cp310-win_amd64.pyd',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\rect.cp310-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\constants.cp310-win_amd64.pyd',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\constants.cp310-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\base.cp310-win_amd64.pyd',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\base.cp310-win_amd64.pyd',
+   'EXTENSION'),
+  ('VCRUNTIME140.dll',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\\VCRUNTIME140.dll',
+   'BINARY'),
+  ('pygame\\SDL2.dll',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\SDL2.dll',
+   'BINARY'),
+  ('pygame\\zlib1.dll',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\zlib1.dll',
+   'BINARY'),
+  ('pygame\\libjpeg-9.dll',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\libjpeg-9.dll',
+   'BINARY'),
+  ('pygame\\libogg-0.dll',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\libogg-0.dll',
+   'BINARY'),
+  ('pygame\\libopus-0.dll',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\libopus-0.dll',
+   'BINARY'),
+  ('libcrypto-1_1.dll',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\\DLLs\\libcrypto-1_1.dll',
+   'BINARY'),
+  ('libssl-1_1.dll',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\\DLLs\\libssl-1_1.dll',
+   'BINARY'),
+  ('libffi-7.dll',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\\DLLs\\libffi-7.dll',
+   'BINARY'),
+  ('pygame\\SDL2_image.dll',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\SDL2_image.dll',
+   'BINARY'),
+  ('pygame\\libpng16-16.dll',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\libpng16-16.dll',
+   'BINARY'),
+  ('pygame\\SDL2_mixer.dll',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\SDL2_mixer.dll',
+   'BINARY'),
+  ('pygame\\SDL2_ttf.dll',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\SDL2_ttf.dll',
+   'BINARY'),
+  ('pygame\\freetype.dll',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\freetype.dll',
+   'BINARY'),
+  ('Sounds\\ma.mp3',
+   'C:\\Users\\abd alrzaq\\PycharmProjects\\PythonProject\\v2\\Sounds\\ma.mp3',
+   'DATA'),
+  ('images\\aquq.png',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\v2\\images\\aquq.png',
+   'DATA'),
+  ('images\\block.png',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\v2\\images\\block.png',
+   'DATA'),
+  ('images\\container.png',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\v2\\images\\container.png',
+   'DATA'),
+  ('images\\dead.png',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\v2\\images\\dead.png',
+   'DATA'),
+  ('images\\goal2.png',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\v2\\images\\goal2.png',
+   'DATA'),
+  ('images\\goal4.png',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\v2\\images\\goal4.png',
+   'DATA'),
+  ('images\\ground.png',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\v2\\images\\ground.png',
+   'DATA'),
+  ('images\\img.png',
+   'C:\\Users\\abd alrzaq\\PycharmProjects\\PythonProject\\v2\\images\\img.png',
+   'DATA'),
+  ('images\\img_1.png',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\v2\\images\\img_1.png',
+   'DATA'),
+  ('images\\img_2.png',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\v2\\images\\img_2.png',
+   'DATA'),
+  ('images\\img_3.png',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\v2\\images\\img_3.png',
+   'DATA'),
+  ('images\\img_4.png',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\v2\\images\\img_4.png',
+   'DATA'),
+  ('images\\play.png',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\v2\\images\\play.png',
+   'DATA'),
+  ('images\\playert.png',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\v2\\images\\playert.png',
+   'DATA'),
+  ('images\\wall.png',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\v2\\images\\wall.png',
+   'DATA'),
+  ('levels\\level1.txt',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\v2\\levels\\level1.txt',
+   'DATA'),
+  ('levels\\level10.txt',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\v2\\levels\\level10.txt',
+   'DATA'),
+  ('levels\\level14.txt',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\v2\\levels\\level14.txt',
+   'DATA'),
+  ('levels\\level15.txt',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\v2\\levels\\level15.txt',
+   'DATA'),
+  ('levels\\level16.txt',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\v2\\levels\\level16.txt',
+   'DATA'),
+  ('levels\\level2.txt',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\v2\\levels\\level2.txt',
+   'DATA'),
+  ('levels\\level3.txt',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\v2\\levels\\level3.txt',
+   'DATA'),
+  ('levels\\level4.txt',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\v2\\levels\\level4.txt',
+   'DATA'),
+  ('levels\\level5.txt',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\v2\\levels\\level5.txt',
+   'DATA'),
+  ('levels\\level6.txt',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\v2\\levels\\level6.txt',
+   'DATA'),
+  ('levels\\level7.txt',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\v2\\levels\\level7.txt',
+   'DATA'),
+  ('levels\\level9.txt',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\v2\\levels\\level9.txt',
+   'DATA'),
+  ('pygame\\freesansbold.ttf',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\freesansbold.ttf',
+   'DATA'),
+  ('pygame\\pygame_icon.bmp',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\pygame\\pygame_icon.bmp',
+   'DATA'),
+  ('setuptools\\_vendor\\importlib_metadata-8.0.0.dist-info\\REQUESTED',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\setuptools\\_vendor\\importlib_metadata-8.0.0.dist-info\\REQUESTED',
+   'DATA'),
+  ('setuptools\\_vendor\\importlib_metadata-8.0.0.dist-info\\RECORD',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\setuptools\\_vendor\\importlib_metadata-8.0.0.dist-info\\RECORD',
+   'DATA'),
+  ('setuptools\\_vendor\\importlib_metadata-8.0.0.dist-info\\METADATA',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\setuptools\\_vendor\\importlib_metadata-8.0.0.dist-info\\METADATA',
+   'DATA'),
+  ('setuptools\\_vendor\\importlib_metadata-8.0.0.dist-info\\LICENSE',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\setuptools\\_vendor\\importlib_metadata-8.0.0.dist-info\\LICENSE',
+   'DATA'),
+  ('setuptools\\_vendor\\importlib_metadata-8.0.0.dist-info\\INSTALLER',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\setuptools\\_vendor\\importlib_metadata-8.0.0.dist-info\\INSTALLER',
+   'DATA'),
+  ('setuptools\\_vendor\\importlib_metadata-8.0.0.dist-info\\WHEEL',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\setuptools\\_vendor\\importlib_metadata-8.0.0.dist-info\\WHEEL',
+   'DATA'),
+  ('setuptools\\_vendor\\importlib_metadata-8.0.0.dist-info\\top_level.txt',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\setuptools\\_vendor\\importlib_metadata-8.0.0.dist-info\\top_level.txt',
+   'DATA'),
+  ('setuptools\\_vendor\\jaraco\\text\\Lorem ipsum.txt',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\setuptools\\_vendor\\jaraco\\text\\Lorem '
+   'ipsum.txt',
+   'DATA'),
+  ('setuptools\\_vendor\\wheel-0.45.1.dist-info\\entry_points.txt',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\setuptools\\_vendor\\wheel-0.45.1.dist-info\\entry_points.txt',
+   'DATA'),
+  ('setuptools\\_vendor\\wheel-0.45.1.dist-info\\METADATA',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\setuptools\\_vendor\\wheel-0.45.1.dist-info\\METADATA',
+   'DATA'),
+  ('setuptools\\_vendor\\wheel-0.45.1.dist-info\\INSTALLER',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\setuptools\\_vendor\\wheel-0.45.1.dist-info\\INSTALLER',
+   'DATA'),
+  ('setuptools\\_vendor\\wheel-0.45.1.dist-info\\RECORD',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\setuptools\\_vendor\\wheel-0.45.1.dist-info\\RECORD',
+   'DATA'),
+  ('setuptools\\_vendor\\wheel-0.45.1.dist-info\\LICENSE.txt',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\setuptools\\_vendor\\wheel-0.45.1.dist-info\\LICENSE.txt',
+   'DATA'),
+  ('setuptools\\_vendor\\wheel-0.45.1.dist-info\\REQUESTED',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\setuptools\\_vendor\\wheel-0.45.1.dist-info\\REQUESTED',
+   'DATA'),
+  ('setuptools\\_vendor\\wheel-0.45.1.dist-info\\WHEEL',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\setuptools\\_vendor\\wheel-0.45.1.dist-info\\WHEEL',
+   'DATA'),
+  ('base_library.zip',
+   'C:\\Users\\abd alrzaq\\PycharmProjects\\PythonProject\\v2\\build\\Lava and '
+   'Aqua\\base_library.zip',
+   'DATA')],
+ [],
+ False,
+ False,
+ 1763365042,
+ [('runw.exe',
+   'C:\\Users\\abd '
+   'alrzaq\\PycharmProjects\\PythonProject\\.venv\\lib\\site-packages\\PyInstaller\\bootloader\\Windows-64bit-intel\\runw.exe',
+   'EXECUTABLE')],
+ 'C:\\Program '
+ 'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\\python310.dll')
