@@ -144,12 +144,12 @@ class Board:
         return True
 
     def game_status(self):
-        player_layers = self.grid[self.player.y][self.player.x]
 
         if self.goal.x == self.player.x and self.player.y == self.goal.y and self.keys == 0:
             self.GameStatus = "won"
             return True
-        elif any(isinstance(obj, (Lava, Wall)) for obj in player_layers):
+        player_layers = self.grid[self.player.y][self.player.x]
+        if any(isinstance(obj, (Lava, Wall)) for obj in player_layers):
             self.GameStatus = "lose"
             self.player.dead()
         return  False
@@ -162,21 +162,16 @@ class Board:
             if isinstance(obj, Key):
                 player_layers.remove(obj)
                 self.keys -= 1
-                self.goal.updateKeysLeft(self.keys)
-                break
-
+                if self.keys == 0:
+                    self.goal.updateKeysLeft(self.keys)
+                return
 
     def updateNumericBlocks(self):
         for y in range(self.height):
             for x in range(self.width):
-                new_layers = []
-                for obj in self.grid[y][x]:
+                for i, obj in enumerate(self.grid[y][x]):
                     if isinstance(obj, NumericBlock):
-                        new_layers.append(obj.decrease())
-                    else:
-                        new_layers.append(obj)
-                self.grid[y][x] = new_layers
-
+                        self.grid[y][x][i] = obj.decrease()
 
     def draw(self, screen):
         board_pixel_width = self.width * Board.tile_size
@@ -225,46 +220,91 @@ class Board:
 
         return LET == 4
 
+    # def updatelavandwater(self):
+    #     new_grid = [[list(self.grid[y][x]) for x in range(self.width)] for y in range(self.height)]
+    #     # first spread the water then lava so that there is 2 loops
+    #
+    #     for y in range(self.height):
+    #         for x in range(self.width):
+    #             for obj in self.grid[y][x]:
+    #                 if isinstance(obj, Water) :
+    #                     for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+    #                         nx, ny = x + dx, y + dy
+    #                         if 0 <= nx < self.width and 0 <= ny < self.height:
+    #                             target_layers = new_grid[ny][nx]
+    #
+    #                             if any(isinstance(layer, (Wall, Block, NumericBlock)) for layer in target_layers):
+    #                                 continue
+    #
+    #                             if any(isinstance(layer, Lava) for layer in target_layers):
+    #                                 new_grid[ny][nx] = [layer for layer in target_layers if not isinstance(layer, Lava)]
+    #                                 new_grid[ny][nx].append(Wall(nx, ny))
+    #                             elif not any(isinstance(layer, (Water)) for layer in target_layers):
+    #                                 new_grid[ny][nx].append(Water(nx, ny))
+    #
+    #     last_grid = [[list(new_grid[y][x]) for x in range(self.width)] for y in range(self.height)]
+    #     for y in range(self.height):
+    #         for x in range(self.width):
+    #             for obj in new_grid[y][x]:
+    #                 if isinstance(obj, Lava) :
+    #                     for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+    #                         nx, ny = x + dx, y + dy
+    #                         if 0 <= nx < self.width and 0 <= ny < self.height:
+    #                             target_layers = last_grid[ny][nx]
+    #
+    #                             if any(isinstance(layer, (Wall, Block, NumericBlock)) for layer in target_layers):
+    #                                 continue
+    #
+    #                             if any(isinstance(layer, Water) for layer in target_layers):
+    #                                 last_grid[ny][nx] = [layer for layer in target_layers if
+    #                                                      not isinstance(layer, Water)]
+    #                                 last_grid[ny][nx].append(Wall(nx, ny))
+    #                             elif not any(isinstance(layer, (Lava)) for layer in target_layers):
+    #                                 last_grid[ny][nx].append(Lava(nx, ny))
+    #
+    #     self.grid = last_grid
     def updatelavandwater(self):
+
         new_grid = [[list(self.grid[y][x]) for x in range(self.width)] for y in range(self.height)]
-        # first spread the water then lava so that there is 2 loops
 
         for y in range(self.height):
             for x in range(self.width):
                 for obj in self.grid[y][x]:
-                    if isinstance(obj, Water) :
+                    if isinstance(obj, Water):
                         for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
                             nx, ny = x + dx, y + dy
                             if 0 <= nx < self.width and 0 <= ny < self.height:
+
                                 target_layers = new_grid[ny][nx]
 
-                                if any(isinstance(layer, (Wall, Block, NumericBlock)) for layer in target_layers):
+                                if any(isinstance(l, (Wall, Block, NumericBlock)) for l in target_layers):
                                     continue
 
-                                if any(isinstance(layer, Lava) for layer in target_layers):
-                                    new_grid[ny][nx] = [layer for layer in target_layers if not isinstance(layer, Lava)]
+                                if any(isinstance(l, Lava) for l in target_layers):
+                                    new_grid[ny][nx] = [l for l in target_layers if not isinstance(l, Lava)]
                                     new_grid[ny][nx].append(Wall(nx, ny))
-                                elif not any(isinstance(layer, (Water)) for layer in target_layers):
+                                elif not any(isinstance(l, Water) for l in target_layers):
                                     new_grid[ny][nx].append(Water(nx, ny))
 
         last_grid = [[list(new_grid[y][x]) for x in range(self.width)] for y in range(self.height)]
+
         for y in range(self.height):
             for x in range(self.width):
                 for obj in new_grid[y][x]:
-                    if isinstance(obj, Lava) :
+                    if isinstance(obj, Lava):
                         for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
                             nx, ny = x + dx, y + dy
                             if 0 <= nx < self.width and 0 <= ny < self.height:
+
                                 target_layers = last_grid[ny][nx]
 
-                                if any(isinstance(layer, (Wall, Block, NumericBlock)) for layer in target_layers):
+                                if any(isinstance(l, (Wall, Block, NumericBlock)) for l in target_layers):
                                     continue
 
-                                if any(isinstance(layer, Water) for layer in target_layers):
-                                    last_grid[ny][nx] = [layer for layer in target_layers if
-                                                         not isinstance(layer, Water)]
+                                if any(isinstance(l, Water) for l in target_layers):
+                                    last_grid[ny][nx] = [l for l in target_layers if not isinstance(l, Water)]
                                     last_grid[ny][nx].append(Wall(nx, ny))
-                                elif not any(isinstance(layer, (Lava)) for layer in target_layers):
+                                elif not any(isinstance(l, Lava) for l in target_layers):
                                     last_grid[ny][nx].append(Lava(nx, ny))
 
         self.grid = last_grid

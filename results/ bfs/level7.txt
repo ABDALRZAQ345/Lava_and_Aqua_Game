@@ -1,6 +1,6 @@
 starting level level7.txt solving
-visited nodes:  50112
+visited nodes:  51202
 ['Up', 'Right', 'Right', 'Right', 'Right', 'Right', 'Down', 'Left', 'Down', 'Left', 'Down', 'Left', 'Down', 'Left', 'Left', 'Up', 'Up', 'Up', 'Up', 'Up', 'Up', 'Up', 'Right', 'Right', 'Right', 'Right', 'Right']
 solved in  27 move
-states 58037
-Solve Time using algorithm  bfs 233.22517490386963 seconds
+states 59409
+Solve Time using algorithm  bfs 192.00452327728271 seconds

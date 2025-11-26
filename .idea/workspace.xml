@@ -4,20 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e3f607e8-f190-4913-9b87-a3d056fd016d" name="Changes" comment="delete unwanted files">
-      <change afterPath="$PROJECT_DIR$/levels/level13.txt" afterDir="false" />
+    <list default="true" id="e3f607e8-f190-4913-9b87-a3d056fd016d" name="Changes" comment="algorithm">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Board.py" beforeDir="false" afterPath="$PROJECT_DIR$/Board.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game.py" beforeDir="false" afterPath="$PROJECT_DIR$/Game.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/levels/level10.txt" beforeDir="false" afterPath="$PROJECT_DIR$/levels/level10.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/levels/level14.txt" beforeDir="false" afterPath="$PROJECT_DIR$/levels/level14.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/levels/level16.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/levels/level2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/levels/level2.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/levels/level3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/levels/level3.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/levels/level4.txt" beforeDir="false" afterPath="$PROJECT_DIR$/levels/level4.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/levels/level5.txt" beforeDir="false" afterPath="$PROJECT_DIR$/levels/level5.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/levels/level6.txt" beforeDir="false" afterPath="$PROJECT_DIR$/levels/level6.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/levels/level7.txt" beforeDir="false" afterPath="$PROJECT_DIR$/levels/level7.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/levels/level9.txt" beforeDir="false" afterPath="$PROJECT_DIR$/levels/level9.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/ bfs/level7.txt" beforeDir="false" afterPath="$PROJECT_DIR$/results/ bfs/level7.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,13 +126,22 @@
       <option name="project" value="LOCAL" />
       <updated>1763458594905</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="algorithm">
+      <option name="closed" value="true" />
+      <created>1764146618478</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1764146618478</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="new image" />
     <MESSAGE value="Merge remote-tracking branch 'origin/master'" />
     <MESSAGE value="delete unwanted files" />
-    <option name="LAST_COMMIT_MESSAGE" value="delete unwanted files" />
+    <MESSAGE value="algorithm" />
+    <option name="LAST_COMMIT_MESSAGE" value="algorithm" />
   </component>
 </project>

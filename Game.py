@@ -16,6 +16,7 @@ for _ in range(10):
 
 class Game:
     def __init__(self, screen, level_file):
+        self.moves = None
         self.screen = screen
         self.clock = pygame.time.Clock()
         self.running = True
@@ -114,17 +115,19 @@ class Game:
     def solve(self, algorithm="dfs"):
         self.visited = set()
         self.solution = []
+        self.moves=0
         if algorithm == "dfs":
-            moves=self.dfs(self.current_board)
+            self.moves=self.dfs(self.current_board)
         else:
-            moves = self.bfs(self.current_board)
-        self.solution=self.solution[::-1]
+            self.moves = self.bfs(self.current_board)
+
+        return self.moves > 0
+
+    def get_solution(self):
+        self.solution = self.solution[::-1]
         print(self.solution)
-        print("solved in ",moves,"move")
-        print("states",len(self.visited))
-
-        return moves > 0
-
+        print("solved in ", self.moves, "move")
+        print("states", len(self.visited))
 
 
 
@@ -132,7 +135,7 @@ class Game:
 
     def dfs(self, board):
        state=board.hashed()
-       if state in self.visited:
+       if state in self.visited or board.number_of_moves >=200:
            return False
        if board.GameStatus == "won":
            return board.number_of_moves

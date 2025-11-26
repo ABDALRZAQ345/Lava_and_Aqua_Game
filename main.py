@@ -214,13 +214,14 @@ def play_level(level_file):
     game = Game(screen, Resource.path(f"levels/{level_file}"))
     print(f"starting level {selected_level} solving")
 
-    start_time = time.time()
-    game.solve(algo)
-    solve_time = time.time() - start_time
-    print("Solve Time using algorithm ",algo,solve_time,"seconds")
-    game.animate_solution(125)
+    # start_time = time.time()
+    # game.solve(algo)
+    # solve_time = time.time() - start_time
+    # game.get_solution()
+    # print("Solve Time using algorithm ",algo,solve_time,"seconds")
+    # game.animate_solution(125)
 
-    #game.run()
+    game.run()
 
     return show_end_screen(game.states.get_current_state().GameStatus)
 
