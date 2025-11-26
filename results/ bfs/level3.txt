@@ -1,0 +1,6 @@
+starting level level3.txt solving
+visited nodes:  6432
+['Down', 'Down', 'Left', 'Down', 'Right', 'Right', 'Right', 'Right', 'Right', 'Right', 'Right', 'Up', 'Up', 'Up', 'Up', 'Right', 'Up', 'Left', 'Left', 'Down', 'Left', 'Up', 'Right', 'Up', 'Left', 'Left', 'Left', 'Left', 'Left', 'Left', 'Left', 'Left', 'Left', 'Down', 'Down', 'Right', 'Down', 'Down', 'Left']
+solved in  39 move
+states 6590
+Solve Time using algorithm  bfs 28.129403591156006 seconds

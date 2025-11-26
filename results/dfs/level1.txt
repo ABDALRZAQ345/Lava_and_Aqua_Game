@@ -1,0 +1,5 @@
+starting level level1.txt solving
+['Right', 'Right', 'Right', 'Right', 'Right', 'Right', 'Right', 'Right', 'Right', 'Right', 'Right', 'Right']
+solved in  12 move
+states 64
+Solve Time using algorithm  dfs 0.15860772132873535 seconds

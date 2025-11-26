@@ -1,0 +1,6 @@
+starting level level2.txt solving
+visited nodes:  2149
+['Up', 'Up', 'Up', 'Up', 'Right', 'Right', 'Right', 'Right', 'Up', 'Up', 'Up', 'Right', 'Right', 'Right']
+solved in  14 move
+states 2297
+Solve Time using algorithm  bfs 8.618175745010376 seconds

@@ -1,0 +1,5 @@
+starting level level5.txt solving
+['Up', 'Up', 'Right', 'Right', 'Right', 'Right', 'Right', 'Right', 'Right', 'Right', 'Right', 'Down', 'Right', 'Up', 'Down', 'Down', 'Down', 'Up', 'Down', 'Right', 'Up', 'Up', 'Up', 'Up', 'Right', 'Up']
+solved in  26 move
+states 557
+Solve Time using algorithm  dfs 0.8291637897491455 seconds

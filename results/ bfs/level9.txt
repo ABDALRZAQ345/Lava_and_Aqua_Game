@@ -1,0 +1,6 @@
+starting level level9.txt solving
+visited nodes:  58307
+['Down', 'Down', 'Left', 'Left', 'Up', 'Right', 'Down', 'Right', 'Up', 'Up', 'Down', 'Right', 'Right', 'Up', 'Right', 'Up', 'Left', 'Down', 'Left', 'Up', 'Down', 'Left', 'Up', 'Up', 'Down', 'Right', 'Up', 'Up', 'Down', 'Left', 'Up', 'Left', 'Left', 'Left', 'Left', 'Left', 'Down', 'Down', 'Left', 'Down', 'Up', 'Right', 'Up', 'Up', 'Right', 'Right', 'Right', 'Right', 'Right', 'Right', 'Right', 'Right', 'Right', 'Right', 'Right', 'Down', 'Down', 'Right', 'Down']
+solved in  59 move
+states 58737
+Solve Time using algorithm  bfs 102.00564074516296 seconds

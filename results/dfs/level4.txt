@@ -1,0 +1,5 @@
+starting level level4.txt solving
+['Down', 'Up', 'Up', 'Up', 'Up', 'Up', 'Up', 'Up', 'Up', 'Up', 'Right', 'Down', 'Up', 'Right', 'Down', 'Down', 'Right', 'Down', 'Right', 'Down', 'Right', 'Down', 'Right', 'Down', 'Right', 'Down', 'Right', 'Down', 'Right', 'Down', 'Right', 'Down', 'Right', 'Up', 'Up', 'Up', 'Up', 'Up', 'Up', 'Up', 'Up']
+solved in  41 move
+states 52
+Solve Time using algorithm  dfs 0.17737746238708496 seconds

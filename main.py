@@ -1,3 +1,5 @@
+import time
+
 import pygame
 from Game import Game
 from Pygame.Resource import Resource
@@ -59,7 +61,8 @@ class GameStatus(Enum):
 # =====================================================================
 
 pygame.init()
-screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+screen = pygame.display.set_mode((1500, 720))
+
 SCREEN_W, SCREEN_H = screen.get_size()
 clock = pygame.time.Clock()
 
@@ -71,9 +74,9 @@ pygame.mixer.music.load(Resource.path(r"Sounds\ma.mp3"))
 pygame.mixer.music.set_volume(0.3)
 
 levels = [
-    "level1.txt", "level2.txt", "level3.txt", "level4.txt",
+    "level1.txt", "level3.txt", "level2.txt", "level4.txt",
     "level5.txt", "level6.txt", "level7.txt", "level9.txt",
-    "level10.txt", "level14.txt", "level15.txt", "level16.txt",
+    "level10.txt", "level14.txt", "level15.txt", "level13.txt",
 ]
 
 stars = [Star(SCREEN_W, SCREEN_H) for _ in range(40)]
@@ -121,7 +124,7 @@ def draw_level_selection(selected_index=None):
 # =====================================================================
 #   Level Selection Loop
 # =====================================================================
-
+selected_index = 0
 def level_selection_loop():
     selected_index = 0
     draw_level_selection(selected_index)
@@ -163,15 +166,63 @@ def level_selection_loop():
 # =====================================================================
 #   Play Level
 # =====================================================================
+def algorithm_selection_loop():
+    options = ["dfs", "bfs"]
+    selected_index = 0
+
+    while True:
+        screen.fill((20, 20, 20))
+
+        title = Fonts.large.render("Choose Algorithm", True, (255, 255, 255))
+        screen.blit(title, (SCREEN_W // 2 - title.get_width() // 2, 50))
+
+        for i, option in enumerate(options):
+            color = (76, 175, 80) if i != selected_index else (255, 200, 0)
+            rect = pygame.Rect(500, 200 + i * 80, 500, 60)
+            pygame.draw.rect(screen, color, rect)
+            txt = Fonts.small.render(option.upper(), True, (255, 255, 255))
+            screen.blit(txt, (rect.x + 20, rect.y + 15))
+
+        pygame.display.flip()
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                return None
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_DOWN:
+                    selected_index = (selected_index + 1) % len(options)
+                elif event.key == pygame.K_UP:
+                    selected_index = (selected_index - 1) % len(options)
+                elif event.key in (pygame.K_RETURN, pygame.K_SPACE):
+                    return options[selected_index]
+                elif event.key == pygame.K_ESCAPE:
+                    return None
+
+            elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                pos = event.pos
+                rect = pygame.Rect(500, 200 + selected_index * 80, 500, 60)
+                if rect.collidepoint(pos):
+                    return options[selected_index]
+
 
 def play_level(level_file):
-    pygame.mixer.music.play(-1)   # no load here
+    algo = algorithm_selection_loop()
+    if algo is None:
+        return GameStatus.BACK
+
     game = Game(screen, Resource.path(f"levels/{level_file}"))
-    game.run()
-    pygame.mixer.music.stop()
+    print(f"starting level {selected_level} solving")
+
+    start_time = time.time()
+    game.solve(algo)
+    solve_time = time.time() - start_time
+    print("Solve Time using algorithm ",algo,solve_time,"seconds")
+    game.animate_solution(125)
+
+    #game.run()
 
     return show_end_screen(game.states.get_current_state().GameStatus)
-
 
 # =====================================================================
 #   End Screen

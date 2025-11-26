@@ -1,3 +1,5 @@
+import struct
+
 import pygame
 
 from Loader import Loader
@@ -11,6 +13,10 @@ from obj.lava import Lava
 from obj.Player import Player
 from obj.Wall import Wall
 from obj.Water import Water
+import xxhash
+
+pack_u32 = struct.Struct("<I").pack
+pack_u16 = struct.Struct("<H").pack
 class Board:
     tile_size=75
     def __init__(self, filename=None):
@@ -21,6 +27,7 @@ class Board:
         self.player = None
         self.goal = None
         self.GameStatus = "Running"
+        self.number_of_moves=0
         if filename:
             self.load_from_file(filename)
 
@@ -36,12 +43,11 @@ class Board:
 
     def clone(self):
         new_board = Board.__new__(Board)
-        ## just for copying grid for states
         new_board.width = self.width
         new_board.height = self.height
         new_board.tile_size = Board.tile_size
         new_board.GameStatus = self.GameStatus
-
+        new_board.number_of_moves=self.number_of_moves
         new_board.player = Player(self.player.x, self.player.y)
 
         new_board.keys = self.keys
@@ -84,22 +90,10 @@ class Board:
         return self.grid[y][x]
 
 
-    def handle_input(self, key):
-        move_map = {
-            pygame.K_LEFT: (-1, 0),
-            pygame.K_a: (-1, 0),
-            pygame.K_RIGHT: (1, 0),
-            pygame.K_d: (1, 0),
-            pygame.K_UP: (0, -1),
-            pygame.K_w: (0, -1),
-            pygame.K_DOWN: (0, 1),
-            pygame.K_s: (0, 1),
-        }
+    def handleMovment(self, direction):
 
-        if key not in move_map:
-            return False
 
-        dx, dy = move_map[key]
+        dx, dy = direction
         new_x, new_y = self.player.x + dx, self.player.y + dy
 
         if not (0 <= new_x < self.width and 0 <= new_y < self.height):
@@ -146,7 +140,7 @@ class Board:
         self.updateNumericBlocks()
         self.collect_keys()
         self.game_status()
-
+        self.number_of_moves+=1
         return True
 
     def game_status(self):
@@ -154,9 +148,11 @@ class Board:
 
         if self.goal.x == self.player.x and self.player.y == self.goal.y and self.keys == 0:
             self.GameStatus = "won"
+            return True
         elif any(isinstance(obj, (Lava, Wall)) for obj in player_layers):
             self.GameStatus = "lose"
             self.player.dead()
+        return  False
 
     def collect_keys(self):
         player_layers = self.grid[self.player.y][self.player.x]
@@ -206,6 +202,28 @@ class Board:
         if self.player:
             self.player.draw(screen, Board.tile_size, offset=(offset_x, offset_y))
 
+    def is_goal_surrounded_by_lava(self):
+        gx, gy = self.goal.x, self.goal.y
+
+        directions = [
+            (0, 1),
+            (0, -1),
+            (1, 0),
+            (-1, 0),
+        ]
+        LET=0
+        for dx, dy in directions:
+            nx, ny = gx + dx, gy + dy
+
+            if not (0 <= nx < self.width and 0 <= ny < self.height):
+                LET+=1
+                continue
+
+            cell_layers = self.grid[ny][nx]
+            if any(isinstance(obj, (Lava,Wall)) for obj in cell_layers):
+                LET+=1
+
+        return LET == 4
 
     def updatelavandwater(self):
         new_grid = [[list(self.grid[y][x]) for x in range(self.width)] for y in range(self.height)]
@@ -251,18 +269,10 @@ class Board:
 
         self.grid = last_grid
 
-    def check_can_move(self, key):
-        move_map = {
-            "left": (-1, 0),
-            "right": (1, 0),
-            "up": (0, -1),
-            "down": (0, 1),
-        }
+    def check_can_move(self, direction):
 
-        if key not in move_map:
-            return False
 
-        dx, dy = move_map[key]
+        dx, dy =direction
         new_x, new_y = self.player.x + dx, self.player.y + dy
 
         if not (0 <= new_x < self.width and 0 <= new_y < self.height):
@@ -295,11 +305,55 @@ class Board:
 
     def get_available_moves(self):
         moves = []
-        for key in ["left", "right", "up", "down"]:
-            if self.check_can_move(key):
-                moves.append(key)
+
+        directions = {
+            (0, 1): "Down",
+            (0, -1): "Up",
+            (1, 0): "Right",
+            (-1, 0): "Left"
+        }
+
+        for direction, name in directions.items():
+            if self.check_can_move(direction):
+                moves.append((direction, name))
 
         return moves
+
+    type_map = {
+
+        Wall: 0,
+        Block: 1,
+        Water: 2,
+        Lava: 3,
+        NumericBlock: 4,
+        Key: 5,
+
+    }
+
+
+    def hashed(self):
+        h = xxhash.xxh64()
+
+        for row in self.grid:
+            for cell in row:
+                cell_value = 0
+                for obj in cell:
+                    t = type(obj)
+                    if t in {Ground, Tube, Player, Goal}:
+                        continue
+                    type_id = Board.type_map[t]
+                    value = getattr(obj, "value", 0)
+                    object_code = (type_id << 6) | value
+                    cell_value ^= object_code
+                h.update(pack_u32(cell_value))
+        h.update(pack_u16(self.player.x))
+        h.update(pack_u16(self.player.y))
+
+        return h.hexdigest()
+
+
+
+
 
 
 

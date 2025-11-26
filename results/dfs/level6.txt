@@ -1,0 +1,5 @@
+starting level level6.txt solving
+['Right', 'Down', 'Left', 'Down', 'Left', 'Up', 'Up', 'Down', 'Down', 'Right', 'Down', 'Down', 'Down', 'Down', 'Up', 'Up', 'Up', 'Up', 'Up', 'Up', 'Up', 'Right', 'Down', 'Down', 'Down', 'Down', 'Down', 'Down', 'Down', 'Down', 'Left', 'Up', 'Up', 'Up', 'Up', 'Up', 'Up', 'Up', 'Up', 'Left', 'Down', 'Down', 'Down', 'Down', 'Down', 'Down', 'Right', 'Down', 'Down', 'Left', 'Right', 'Up', 'Up', 'Up', 'Up', 'Up', 'Up', 'Up', 'Up', 'Left', 'Down', 'Down', 'Down', 'Down', 'Down', 'Down', 'Left', 'Up', 'Up', 'Up', 'Up', 'Left', 'Down', 'Down', 'Down', 'Down', 'Left', 'Up', 'Up', 'Up', 'Up', 'Left', 'Down', 'Down', 'Down', 'Down', 'Right', 'Up', 'Up', 'Up', 'Up', 'Right', 'Down', 'Down', 'Down', 'Down', 'Right', 'Up', 'Up', 'Up', 'Up', 'Right', 'Down', 'Down', 'Down', 'Down', 'Right', 'Down', 'Down', 'Right', 'Up', 'Up', 'Up', 'Up', 'Up', 'Up', 'Up', 'Up', 'Right', 'Down', 'Down', 'Down', 'Down']
+solved in  123 move
+states 45038
+Solve Time using algorithm  dfs 144.2860689163208 seconds

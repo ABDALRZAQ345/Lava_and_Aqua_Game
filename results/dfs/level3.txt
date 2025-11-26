@@ -1,0 +1,5 @@
+starting level level3.txt solving
+['Down', 'Down', 'Up', 'Down', 'Left', 'Down', 'Right', 'Right', 'Right', 'Right', 'Right', 'Right', 'Right', 'Up', 'Up', 'Up', 'Up', 'Right', 'Up', 'Left', 'Left', 'Down', 'Left', 'Up', 'Down', 'Down', 'Down', 'Right', 'Up', 'Up', 'Up', 'Up', 'Left', 'Left', 'Left', 'Left', 'Left', 'Left', 'Left', 'Left', 'Left', 'Down', 'Down', 'Up', 'Up', 'Left', 'Right', 'Down', 'Down', 'Right', 'Down', 'Down', 'Left']
+solved in  53 move
+states 5049
+Solve Time using algorithm  dfs 18.29282021522522 seconds

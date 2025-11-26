@@ -1,0 +1,5 @@
+starting level level2.txt solving
+['Up', 'Up', 'Up', 'Up', 'Right', 'Right', 'Right', 'Right', 'Down', 'Down', 'Down', 'Down', 'Down', 'Left', 'Up', 'Up', 'Up', 'Up', 'Up', 'Up', 'Up', 'Up', 'Right', 'Down', 'Down', 'Right', 'Up', 'Up', 'Right', 'Down', 'Right', 'Up']
+solved in  32 move
+states 1024
+Solve Time using algorithm  dfs 3.6255757808685303 seconds

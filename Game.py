@@ -1,4 +1,8 @@
 import pygame
+from fontTools.ttLib.ttVisitor import visit
+from pywin.dialogs import status
+from collections import deque
+
 from Board import Board
 from States import StateManager
 import random
@@ -8,6 +12,8 @@ for _ in range(10):
     stars.append([random.randint(-100, 400), random.randint(0, 800), random.randint(1, 3)])
 for _ in range(10):
     stars.append([random.randint(1300, 1600), random.randint(0, 800), random.randint(1, 3)])
+
+
 class Game:
     def __init__(self, screen, level_file):
         self.screen = screen
@@ -16,6 +22,8 @@ class Game:
         self.states = StateManager()
         self.states.push_state(Board(level_file))
         self.current_board = self.states.get_current_state()
+        self.visited = set()
+        self.solution=[]
 
     def handle_input(self):
         for event in pygame.event.get():
@@ -38,19 +46,30 @@ class Game:
                 return
 
             if event.key == pygame.K_r:
-
                 self.states.reset()
                 first_board = self.states.get_current_state().clone()
                 self.states.push_state(first_board)
                 self.current_board = self.states.get_current_state()
                 return
+            move_map = {
+                pygame.K_LEFT: (-1, 0),
+                pygame.K_a: (-1, 0),
+                pygame.K_RIGHT: (1, 0),
+                pygame.K_d: (1, 0),
+                pygame.K_UP: (0, -1),
+                pygame.K_w: (0, -1),
+                pygame.K_DOWN: (0, 1),
+                pygame.K_s: (0, 1),
+            }
+            if event.key not in move_map:
+                return False
 
-            moved = self.current_board.handle_input(event.key)
+            moved = self.current_board.handleMovment(move_map[event.key])
 
             if moved:
                 self.states.push_state(self.current_board)
                 self.current_board = self.states.get_current_state()
-            print(self.current_board.get_available_moves())
+        #  print(self.current_board.get_available_moves())
 
     def update(self):
         if self.current_board.GameStatus in ("won", "lose"):
@@ -86,3 +105,126 @@ class Game:
             self.clock.tick(30)
 
         pygame.event.clear()
+
+    visited = []
+
+    def undo(self):
+        self.current_board = self.states.get_current_state()
+
+    def solve(self, algorithm="dfs"):
+        self.visited = set()
+        self.solution = []
+        if algorithm == "dfs":
+            moves=self.dfs(self.current_board)
+        else:
+            moves = self.bfs(self.current_board)
+        self.solution=self.solution[::-1]
+        print(self.solution)
+        print("solved in ",moves,"move")
+        print("states",len(self.visited))
+
+        return moves > 0
+
+
+
+
+
+
+    def dfs(self, board):
+       state=board.hashed()
+       if state in self.visited:
+           return False
+       if board.GameStatus == "won":
+           return board.number_of_moves
+       if board.GameStatus == "lose" or board.is_goal_surrounded_by_lava():
+           return False
+       self.visited.add(state)
+       ret=0
+       moves=board.get_available_moves()
+       for direction , name in moves:
+            new_board=board.clone()
+            new_board.handleMovment(direction)
+            ret = self.dfs(new_board)
+            if ret:
+                self.solution.append(name)
+                break
+       return ret
+
+
+
+
+    def bfs(self, start_board):
+        start_state = start_board.hashed()
+
+        queue = deque([start_board])
+        self.visited = set([start_state])
+        visited_nodes=0
+        parent = {start_state: (None, None)}
+
+        while queue:
+            board = queue.popleft()
+            state = board.hashed()
+            visited_nodes+=1
+            if board.GameStatus == "won":
+                print("visited nodes: ", visited_nodes)
+                self.reconstruct_path(parent, state)
+                return board.number_of_moves
+            if board.GameStatus == "lose" or board.is_goal_surrounded_by_lava() :
+                continue
+            for direction, name in board.get_available_moves():
+                new_board = board.clone()
+                new_board.handleMovment(direction)
+                new_state = new_board.hashed()
+
+                if new_state not in self.visited:
+                    self.visited.add(new_state)
+                    parent[new_state] = (state, name)
+                    queue.append(new_board)
+        return 0
+
+    def reconstruct_path(self, parent, final_state):
+
+        state = final_state
+
+        while True:
+            prev_state, move = parent[state]
+            if prev_state is None:
+                break
+            self.solution.append(move)
+            state = prev_state
+
+    def animate_solution(self, delay_ms=300):
+
+
+        if not self.solution:
+            return
+
+        move_to_dir = {
+            "Left": (-1, 0),
+            "Right": (1, 0),
+            "Up": (0, -1),
+            "Down": (0, 1),
+        }
+
+        for move in self.solution:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    self.running = False
+                    return
+
+            direction = move_to_dir.get(move)
+            if not direction:
+                print("Unknown move:", move)
+                continue
+
+            moved = self.current_board.handleMovment(direction)
+            if moved:
+                self.states.push_state(self.current_board)
+                self.current_board = self.states.get_current_state()
+
+            self.draw()
+
+            pygame.time.wait(delay_ms)
+
+            self.clock.tick(60)
+
