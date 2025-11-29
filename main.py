@@ -10,30 +10,30 @@ from enum import Enum
 # =====================================================================
 #   Stars System
 # =====================================================================
-
-class Star:
-    def __init__(self, screen_w, screen_h):
-        self.size = None
-        self.y = None
-        self.x = None
-        self.screen_w = screen_w
-        self.screen_h = screen_h
-        self.reset()
-
-    def reset(self):
-        self.x = random.randint(0, self.screen_w)
-        self.y = random.randint(0, self.screen_h)
-        self.size = random.randint(1, 3)
-
-    def update(self):
-        self.y += 1
-        if self.y > self.screen_h:
-            self.y = 0
-            self.x = random.randint(0, self.screen_w)
-
-    def draw(self, surface):
-        pygame.draw.circle(surface, (255, 255, 255), (self.x, self.y), self.size)
-
+#
+# class Star:
+#     def __init__(self, screen_w, screen_h):
+#         self.size = None
+#         self.y = None
+#         self.x = None
+#         self.screen_w = screen_w
+#         self.screen_h = screen_h
+#         self.reset()
+#
+#     def reset(self):
+#         self.x = random.randint(0, self.screen_w)
+#         self.y = random.randint(0, self.screen_h)
+#         self.size = random.randint(1, 3)
+#
+#     def update(self):
+#         self.y += 1
+#         if self.y > self.screen_h:
+#             self.y = 0
+#             self.x = random.randint(0, self.screen_w)
+#
+#     def draw(self, surface):
+#         pygame.draw.circle(surface, (255, 255, 255), (self.x, self.y), self.size)
+#
 
 # =====================================================================
 #   Fonts Manager
@@ -79,7 +79,7 @@ levels = [
     "level10.txt", "level14.txt", "level15.txt", "level13.txt",
 ]
 
-stars = [Star(SCREEN_W, SCREEN_H) for _ in range(40)]
+# stars = [Star(SCREEN_W, SCREEN_H) for _ in range(40)]
 
 level_rects = []
 last_selected_index = None
@@ -105,9 +105,9 @@ def draw_level_selection(selected_index=None):
     screen.fill((30, 30, 30))
     title = Fonts.large.render("Choose level", True, (255, 255, 255))
     screen.blit(title, (screen.get_width() // 2 - title.get_width() // 2, 10))
-    for star in stars:
-        star.update()
-        star.draw(screen)
+    # for star in stars:
+    #     star.update()
+    #     star.draw(screen)
 
     level_rects = []
     for idx, lvl in enumerate(levels):
@@ -214,14 +214,14 @@ def play_level(level_file):
     game = Game(screen, Resource.path(f"levels/{level_file}"))
     print(f"starting level {selected_level} solving")
 
-    # start_time = time.time()
-    # game.solve(algo)
-    # solve_time = time.time() - start_time
-    # game.get_solution()
-    # print("Solve Time using algorithm ",algo,solve_time,"seconds")
-    # game.animate_solution(125)
+    start_time = time.time()
+    game.solve(algo)
+    solve_time = time.time() - start_time
+    game.get_solution()
+    print("Solve Time using algorithm ",algo,solve_time,"seconds")
+    game.animate_solution(125)
 
-    game.run()
+#    game.run()
 
     return show_end_screen(game.states.get_current_state().GameStatus)
 

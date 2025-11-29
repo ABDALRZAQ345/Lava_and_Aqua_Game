@@ -7,6 +7,7 @@ from Board import Board
 from States import StateManager
 import random
 
+
 stars = []
 for _ in range(10):
     stars.append([random.randint(-100, 400), random.randint(0, 800), random.randint(1, 3)])
@@ -135,11 +136,11 @@ class Game:
 
     def dfs(self, board):
        state=board.hashed()
-       if state in self.visited or board.number_of_moves >=200:
+       if state in self.visited or board.number_of_moves >= 200:
            return False
        if board.GameStatus == "won":
            return board.number_of_moves
-       if board.GameStatus == "lose" or board.is_goal_surrounded_by_lava():
+       if board.GameStatus == "lose" :
            return False
        self.visited.add(state)
        ret=0
@@ -168,11 +169,11 @@ class Game:
             board = queue.popleft()
             state = board.hashed()
             visited_nodes+=1
-            if board.GameStatus == "won":
+            if board.GameStatus == "won" :
                 print("visited nodes: ", visited_nodes)
                 self.reconstruct_path(parent, state)
                 return board.number_of_moves
-            if board.GameStatus == "lose" or board.is_goal_surrounded_by_lava() :
+            if board.GameStatus == "lose" or board.is_goal_surrounded_by_lava() or board.number_of_moves > 50 :
                 continue
             for direction, name in board.get_available_moves():
                 new_board = board.clone()

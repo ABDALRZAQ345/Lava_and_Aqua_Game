@@ -1,3 +1,6 @@
+# [Dfs](Game.py#L137)
+# [Bfs](Game.py#L160)
+
 # Lava and Aqua Game
 
  Lava and Aqua is a puzzle game where you need to reach the exit without touching the lava on each level. The lava will flow every time you move, so think before you step. 

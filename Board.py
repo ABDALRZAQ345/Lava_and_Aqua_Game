@@ -347,10 +347,12 @@ class Board:
         moves = []
 
         directions = {
-            (0, 1): "Down",
+
             (0, -1): "Up",
+            (0, 1): "Down",
+            (-1, 0): "Left",
             (1, 0): "Right",
-            (-1, 0): "Left"
+
         }
 
         for direction, name in directions.items():
