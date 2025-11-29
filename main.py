@@ -167,7 +167,7 @@ def level_selection_loop():
 #   Play Level
 # =====================================================================
 def algorithm_selection_loop():
-    options = ["dfs", "bfs"]
+    options = ["dfs", "bfs","play"]
     selected_index = 0
 
     while True:
@@ -213,15 +213,17 @@ def play_level(level_file):
 
     game = Game(screen, Resource.path(f"levels/{level_file}"))
     print(f"starting level {selected_level} solving")
+    if algo == "play" :
+        game.run()
+    else:
+        start_time = time.time()
+        game.solve(algo)
+        solve_time = time.time() - start_time
+        game.get_solution()
+        print("Solve Time using algorithm ",algo,solve_time,"seconds")
+        game.animate_solution(125)
 
-    start_time = time.time()
-    game.solve(algo)
-    solve_time = time.time() - start_time
-    game.get_solution()
-    print("Solve Time using algorithm ",algo,solve_time,"seconds")
-    game.animate_solution(125)
 
-#    game.run()
 
     return show_end_screen(game.states.get_current_state().GameStatus)
 
