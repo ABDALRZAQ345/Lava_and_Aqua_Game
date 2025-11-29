@@ -6,6 +6,8 @@ from Pygame.Resource import Resource
 import random
 from enum import Enum
 
+from Solver import Solver
+
 
 # =====================================================================
 #   Stars System
@@ -205,7 +207,7 @@ def algorithm_selection_loop():
                 if rect.collidepoint(pos):
                     return options[selected_index]
 
-
+solver= Solver()
 def play_level(level_file):
     algo = algorithm_selection_loop()
     if algo is None:
@@ -215,23 +217,31 @@ def play_level(level_file):
     print(f"starting level {selected_level} solving")
     if algo == "play" :
         game.run()
+        return show_end_screen(
+            game.states.get_current_state().GameStatus,
+        )
     else:
         start_time = time.time()
-        game.solve(algo)
+        result = solver.solve(game.current_board,algo)
         solve_time = time.time() - start_time
-        game.get_solution()
+
         print("Solve Time using algorithm ",algo,solve_time,"seconds")
-        game.animate_solution(125)
+        game.animate_solution(result["solution"],125)
+        return show_end_screen(
+            game.current_board.GameStatus,
+            solve_time,
+            result["moves"],
+            result["visited"],
+            result["states"]
+        )
 
 
-
-    return show_end_screen(game.states.get_current_state().GameStatus)
 
 # =====================================================================
 #   End Screen
 # =====================================================================
 
-def show_end_screen(status):
+def show_end_screen(status,solvetime=None,moves=None,visited_states=None,generated_states=None):
     overlay = pygame.Surface((SCREEN_W, SCREEN_H))
     overlay.set_alpha(180)
     overlay.fill((0, 0, 0))
@@ -249,13 +259,23 @@ def show_end_screen(status):
     text = Fonts.emoji.render(msg, True, color)
     rect = text.get_rect(center=(SCREEN_W // 2, SCREEN_H // 2 - 150))
     screen.blit(text, rect)
-    back_rect = pygame.Rect(SCREEN_W // 2 - 150, SCREEN_H // 2 + 20, 300, 60)
+    back_rect = pygame.Rect(SCREEN_W // 2 - 150, SCREEN_H // 2 + 150, 300, 60)
 
     pygame.draw.rect(screen, (60, 60, 60), back_rect, border_radius=8)
     back_label = Fonts.small.render("BACK", True, (255, 255, 255))
     lbl_rect = back_label.get_rect(center=back_rect.center)
     screen.blit(back_label, lbl_rect)
+    if solvetime:
+        info1 = Fonts.small.render(f"Time: {solvetime:.2f}s", True, (255, 255, 255))
+        screen.blit(info1, (SCREEN_W // 2 - 100, SCREEN_H // 2 - 50))
 
+        info2 = Fonts.small.render(f"Moves: {moves}", True, (255, 255, 255))
+        screen.blit(info2, (SCREEN_W // 2 - 100, SCREEN_H // 2))
+
+        info3 = Fonts.small.render(f"Visited States: {visited_states}", True, (255, 255, 255))
+        screen.blit(info3, (SCREEN_W // 2 - 100, SCREEN_H // 2 + 50))
+        info3 = Fonts.small.render(f"Generated States: {generated_states}", True, (255, 255, 255))
+        screen.blit(info3, (SCREEN_W // 2 - 100, SCREEN_H // 2 + 100))
     pygame.display.flip()
 
 

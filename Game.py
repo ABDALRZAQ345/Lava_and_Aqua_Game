@@ -108,7 +108,7 @@ class Game:
 
         pygame.event.clear()
 
-    visited = []
+
 
     def undo(self):
         self.current_board = self.states.get_current_state()
@@ -129,6 +129,11 @@ class Game:
         print(self.solution)
         print("solved in ", self.moves, "move")
         print("states", len(self.visited))
+        return  {
+        "visited" : len(self.solution),
+        "moves" : self.moves,
+        "states": len(self.visited),
+        }
 
 
 
@@ -197,11 +202,7 @@ class Game:
             self.solution.append(move)
             state = prev_state
 
-    def animate_solution(self, delay_ms=300):
-
-
-        if not self.solution:
-            return
+    def animate_solution(self,solution,delay_ms=300):
 
         move_to_dir = {
             "Left": (-1, 0),
@@ -210,7 +211,7 @@ class Game:
             "Down": (0, 1),
         }
 
-        for move in self.solution:
+        for move in solution:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.running = False
@@ -221,11 +222,7 @@ class Game:
                 print("Unknown move:", move)
                 continue
 
-            moved = self.current_board.handleMovment(direction)
-            if moved:
-                self.states.push_state(self.current_board)
-                self.current_board = self.states.get_current_state()
-
+            self.current_board.handleMovment(direction)
             self.draw()
 
             pygame.time.wait(delay_ms)

@@ -1,5 +1,5 @@
-# [Dfs](Game.py#L137)
-# [Bfs](Game.py#L160)
+# [Dfs](Solver.py#L28)
+# [Bfs](Solver.py#L51)
 
 # Lava and Aqua Game
 
