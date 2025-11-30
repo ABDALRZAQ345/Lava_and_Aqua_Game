@@ -1,12 +1,7 @@
 import pygame
-from fontTools.ttLib.ttVisitor import visit
-from pywin.dialogs import status
-from collections import deque
-
 from Board import Board
 from States import StateManager
 import random
-
 
 stars = []
 for _ in range(10):
@@ -24,8 +19,6 @@ class Game:
         self.states = StateManager()
         self.states.push_state(Board(level_file))
         self.current_board = self.states.get_current_state()
-        self.visited = set()
-        self.solution=[]
 
     def handle_input(self):
         for event in pygame.event.get():
@@ -71,7 +64,6 @@ class Game:
             if moved:
                 self.states.push_state(self.current_board)
                 self.current_board = self.states.get_current_state()
-        #  print(self.current_board.get_available_moves())
 
     def update(self):
         if self.current_board.GameStatus in ("won", "lose"):
@@ -108,99 +100,8 @@ class Game:
 
         pygame.event.clear()
 
-
-
     def undo(self):
         self.current_board = self.states.get_current_state()
-
-    def solve(self, algorithm="dfs"):
-        self.visited = set()
-        self.solution = []
-        self.moves=0
-        if algorithm == "dfs":
-            self.moves=self.dfs(self.current_board)
-        else:
-            self.moves = self.bfs(self.current_board)
-
-        return self.moves > 0
-
-    def get_solution(self):
-        self.solution = self.solution[::-1]
-        print(self.solution)
-        print("solved in ", self.moves, "move")
-        print("states", len(self.visited))
-        return  {
-        "visited" : len(self.solution),
-        "moves" : self.moves,
-        "states": len(self.visited),
-        }
-
-
-
-
-
-    def dfs(self, board):
-       state=board.hashed()
-       if state in self.visited or board.number_of_moves >= 200:
-           return False
-       if board.GameStatus == "won":
-           return board.number_of_moves
-       if board.GameStatus == "lose" :
-           return False
-       self.visited.add(state)
-       ret=0
-       moves=board.get_available_moves()
-       for direction , name in moves:
-            new_board=board.clone()
-            new_board.handleMovment(direction)
-            ret = self.dfs(new_board)
-            if ret:
-                self.solution.append(name)
-                break
-       return ret
-
-
-
-
-    def bfs(self, start_board):
-        start_state = start_board.hashed()
-
-        queue = deque([start_board])
-        self.visited = set([start_state])
-        visited_nodes=0
-        parent = {start_state: (None, None)}
-
-        while queue:
-            board = queue.popleft()
-            state = board.hashed()
-            visited_nodes+=1
-            if board.GameStatus == "won" :
-                print("visited nodes: ", visited_nodes)
-                self.reconstruct_path(parent, state)
-                return board.number_of_moves
-            if board.GameStatus == "lose" or board.is_goal_surrounded_by_lava() or board.number_of_moves > 50 :
-                continue
-            for direction, name in board.get_available_moves():
-                new_board = board.clone()
-                new_board.handleMovment(direction)
-                new_state = new_board.hashed()
-
-                if new_state not in self.visited:
-                    self.visited.add(new_state)
-                    parent[new_state] = (state, name)
-                    queue.append(new_board)
-        return 0
-
-    def reconstruct_path(self, parent, final_state):
-
-        state = final_state
-
-        while True:
-            prev_state, move = parent[state]
-            if prev_state is None:
-                break
-            self.solution.append(move)
-            state = prev_state
 
     def animate_solution(self,solution,delay_ms=300):
 

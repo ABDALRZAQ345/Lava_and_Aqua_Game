@@ -5,7 +5,8 @@ class Solver:
         self.visited_nodes = 0
         self.visited = set()
         self.solution=[]
-    ## i used that function because name of algo pased from gui
+
+    ## I used that function because name of algo passed from gui
     def solve(self,board, algorithm="dfs"):
         self.visited = set()
         self.solution=[]
@@ -38,7 +39,7 @@ class Solver:
     ## boolean denote if got an answer or not
        ret=0
        moves=board.get_available_moves()
-       ## name is like (left ) i used it just for printing
+    ## name is like (left ) i used it just for printing
        for direction , name in moves:
             new_board=board.clone()
             new_board.handleMovment(direction)
