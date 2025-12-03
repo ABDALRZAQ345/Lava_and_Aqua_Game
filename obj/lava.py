@@ -4,10 +4,11 @@ from Pygame.GameObject import GameObject
 
 
 class Lava(GameObject):
+    layer = 1
+    color = (255, 0, 0)
     def __init__(self, x, y):
         super().__init__(x, y)
-        self.layer=1
-        self.color = (255, 0, 0)
+
 
     def draw(self, screen, tile_size, offset=(0, 0)):
         offset_x, offset_y = offset

@@ -1,4 +1,9 @@
+import time
 from collections import deque
+import heapq
+
+from prometheus_client.utils import INF
+
 
 class Solver:
     def __init__(self):
@@ -6,17 +11,17 @@ class Solver:
         self.visited = set()
         self.solution=[]
 
+
     ## I used that function because name of algo passed from gui
     def solve(self,board, algorithm="dfs"):
         self.visited = set()
         self.solution=[]
         self.visited_nodes=0
-        if algorithm == "dfs":
-            self.dfs(board)
-        else:
-            self.bfs(board)
 
+        method = getattr(self, algorithm)
+        method(board)
         self.solution = self.solution[::-1]
+
         return  {
         "solution": self.solution,
         "visited" : self.visited_nodes ,
@@ -24,16 +29,14 @@ class Solver:
         "states": len(self.visited),
         }
 
-
-
     def dfs(self, board):
        state=board.hashed()
-       if state in self.visited or board.number_of_moves >= 200:
+       if state in self.visited:
            return False
        self.visited_nodes += 1
        self.visited.add(state)
        if board.GameStatus == "won":
-           return board.number_of_moves
+           return True
        if board.GameStatus == "lose" :
            return False
     ## boolean denote if got an answer or not
@@ -64,20 +67,22 @@ class Solver:
             if board.GameStatus == "won" :
                 self.visited_nodes=visited_nodes
                 self.reconstruct_path(parent, state)
-                return board.number_of_moves
-            if board.GameStatus == "lose"  or board.number_of_moves > 100 :
+                return  True
+            if board.GameStatus == "lose" :
                 continue
             for direction, name in board.get_available_moves():
+
                 new_board = board.clone()
                 new_board.handleMovment(direction)
                 new_state = new_board.hashed()
+
 
                 if new_state not in self.visited:
                     self.visited.add(new_state)
 
                     parent[new_state] = (state, name)
                     queue.append(new_board)
-        return 0
+        return False
 
     def reconstruct_path(self, parent, final_state):
 
@@ -90,3 +95,31 @@ class Solver:
             self.solution.append(move)
             state = prev_state
 
+    def ucs(self,board):
+        self.visited = {}
+        start_state = board.hashed()
+        parent = {start_state: (None, None)}
+        pq = []
+        heapq.heappush(pq, (board.num_of_lava,board))
+        while pq:
+            cost,board = heapq.heappop(pq)
+
+            self.visited_nodes+=1
+            state = board.hashed()
+            if cost > self.visited[state]:
+                continue
+            if board.GameStatus == "won" :
+                self.reconstruct_path(parent, state)
+                return True
+            if board.GameStatus == "lose" :
+                continue
+            for direction, name in board.get_available_moves():
+                new_board = board.clone()
+                new_board.handleMovment(direction)
+                new_state = new_board.hashed()
+                new_cost = new_board.num_of_lava + cost
+                if  new_cost < self.visited.get(new_state, 10000) :
+                    self.visited[new_state] = new_cost
+                    parent[new_state] = (state, name)
+                    heapq.heappush(pq, (new_cost, new_board))
+        return False

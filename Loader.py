@@ -19,7 +19,7 @@ class Loader:
         height = len(lines)
         width = max(len(line.split(',')) for line in lines)
         grid = [[[] for _ in range(width)] for _ in range(height)]
-
+        num_of_lava = 0
         keys = 0
         player = None
         goal = None
@@ -36,7 +36,7 @@ class Loader:
 
                 elif ch == 'L':
                     grid[y][x].append(Lava(x, y))
-
+                    num_of_lava+=1
                 elif ch == 'A':
                     grid[y][x].append(Water(x, y))
 
@@ -69,5 +69,6 @@ class Loader:
             "height": height,
             "player": player,
             "goal": goal,
-            "keys": keys
+            "keys": keys,
+            "num_of_lava": num_of_lava,
         }

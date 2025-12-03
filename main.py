@@ -13,29 +13,29 @@ from Solver import Solver
 #   Stars System
 # =====================================================================
 #
-# class Star:
-#     def __init__(self, screen_w, screen_h):
-#         self.size = None
-#         self.y = None
-#         self.x = None
-#         self.screen_w = screen_w
-#         self.screen_h = screen_h
-#         self.reset()
-#
-#     def reset(self):
-#         self.x = random.randint(0, self.screen_w)
-#         self.y = random.randint(0, self.screen_h)
-#         self.size = random.randint(1, 3)
-#
-#     def update(self):
-#         self.y += 1
-#         if self.y > self.screen_h:
-#             self.y = 0
-#             self.x = random.randint(0, self.screen_w)
-#
-#     def draw(self, surface):
-#         pygame.draw.circle(surface, (255, 255, 255), (self.x, self.y), self.size)
-#
+class Star:
+    def __init__(self, screen_w, screen_h):
+        self.size = None
+        self.y = None
+        self.x = None
+        self.screen_w = screen_w
+        self.screen_h = screen_h
+        self.reset()
+
+    def reset(self):
+        self.x = random.randint(0, self.screen_w)
+        self.y = random.randint(0, self.screen_h)
+        self.size = random.randint(1, 3)
+
+    def update(self):
+        self.y += 1
+        if self.y > self.screen_h:
+            self.y = 0
+            self.x = random.randint(0, self.screen_w)
+
+    def draw(self, surface):
+        pygame.draw.circle(surface, (255, 255, 255), (self.x, self.y), self.size)
+
 
 # =====================================================================
 #   Fonts Manager
@@ -78,10 +78,10 @@ pygame.mixer.music.set_volume(0.3)
 levels = [
     "level1.txt", "level3.txt", "level2.txt", "level4.txt",
     "level5.txt", "level6.txt", "level7.txt", "level9.txt",
-    "level10.txt", "level14.txt", "level15.txt", "level13.txt",
+    "level10.txt", "level14.txt", "level15.txt", "level13.txt","level22.txt"
 ]
 
-# stars = [Star(SCREEN_W, SCREEN_H) for _ in range(40)]
+stars = [Star(SCREEN_W, SCREEN_H) for _ in range(40)]
 
 level_rects = []
 last_selected_index = None
@@ -107,9 +107,9 @@ def draw_level_selection(selected_index=None):
     screen.fill((30, 30, 30))
     title = Fonts.large.render("Choose level", True, (255, 255, 255))
     screen.blit(title, (screen.get_width() // 2 - title.get_width() // 2, 10))
-    # for star in stars:
-    #     star.update()
-    #     star.draw(screen)
+    for star in stars:
+        star.update()
+        star.draw(screen)
 
     level_rects = []
     for idx, lvl in enumerate(levels):
@@ -169,7 +169,7 @@ def level_selection_loop():
 #   Play Level
 # =====================================================================
 def algorithm_selection_loop():
-    options = ["dfs", "bfs","play"]
+    options = ["dfs", "bfs","ucs","play"]
     selected_index = 0
 
     while True:

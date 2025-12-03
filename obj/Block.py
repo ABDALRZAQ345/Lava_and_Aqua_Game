@@ -6,9 +6,10 @@ from Pygame.GameObject import GameObject
 
 class Block(GameObject):
     img= None
+    layer = 4
     def __init__(self, x, y):
         super().__init__(x, y)
-        self.layer=4
+
         if Block.img is None:
             Block.img = pygame.image.load(Resource.path("images/block.png")).convert_alpha()
     def draw(self, screen, tile_size,offset=(0,0)):

@@ -1,7 +1,4 @@
 import struct
-
-import pygame
-
 from Loader import Loader
 from obj.Goal import Goal
 from obj.Ground import Ground
@@ -19,15 +16,15 @@ pack_u32 = struct.Struct("<I").pack
 pack_u16 = struct.Struct("<H").pack
 class Board:
     tile_size=75
+    width = 0
+    height = 0
     def __init__(self, filename=None):
         self.grid = None
         self.keys = 0
-        self.width = 0
-        self.height = 0
         self.player = None
         self.goal = None
         self.GameStatus = "Running"
-        self.number_of_moves=0
+        self.num_of_lava = 0
         if filename:
             self.load_from_file(filename)
 
@@ -35,23 +32,21 @@ class Board:
         loader = Loader()
         data = loader.load_from_file(filename)
         self.grid = data["grid"]
-        self.width = data["width"]
-        self.height = data["height"]
+        Board.width = data["width"]
+        Board.height = data["height"]
         self.player = data["player"]
         self.goal = data["goal"]
         self.keys = data["keys"]
+        self.num_of_lava = data["num_of_lava"]
 
     def clone(self):
         new_board = Board.__new__(Board)
-        new_board.width = self.width
-        new_board.height = self.height
-        new_board.tile_size = Board.tile_size
-        new_board.GameStatus = self.GameStatus
-        new_board.number_of_moves=self.number_of_moves
-        new_board.player = Player(self.player.x, self.player.y)
 
+        new_board.GameStatus = self.GameStatus
+        new_board.player = Player(self.player.x, self.player.y)
         new_board.keys = self.keys
         new_board.goal = Goal(self.goal.x, self.goal.y,new_board.keys)
+        new_board.num_of_lava = self.num_of_lava
         new_grid = [[[] for _ in range(self.width)] for _ in range(self.height)]
 
         for y in range(self.height):
@@ -81,6 +76,7 @@ class Board:
                         new_obj = Ground(x, y)
 
                     new_grid[y][x].append(new_obj)
+
         new_board.grid = new_grid
         return new_board
 
@@ -91,7 +87,6 @@ class Board:
 
 
     def handleMovment(self, direction):
-
 
         dx, dy = direction
         new_x, new_y = self.player.x + dx, self.player.y + dy
@@ -140,7 +135,6 @@ class Board:
         self.updateNumericBlocks()
         self.collect_keys()
         self.game_status()
-        self.number_of_moves+=1
         return True
 
     def game_status(self):
@@ -151,7 +145,6 @@ class Board:
         player_layers = self.grid[self.player.y][self.player.x]
         if any(isinstance(obj, (Lava, Wall)) for obj in player_layers):
             self.GameStatus = "lose"
-            self.player.dead()
         return  False
 
     def collect_keys(self):
@@ -192,10 +185,8 @@ class Board:
                     for obj in sorted_layers:
                         obj.draw(screen, Board.tile_size, offset=(offset_x, offset_y))
 
-
-
         if self.player:
-            self.player.draw(screen, Board.tile_size, offset=(offset_x, offset_y))
+            self.player.draw(screen, Board.tile_size,offset=(offset_x, offset_y),dead=self.GameStatus=="lose")
 
     def is_goal_surrounded_by_lava(self):
         gx, gy = self.goal.x, self.goal.y
@@ -220,97 +211,49 @@ class Board:
 
         return LET == 4
 
-    # def updatelavandwater(self):
-    #     new_grid = [[list(self.grid[y][x]) for x in range(self.width)] for y in range(self.height)]
-    #     # first spread the water then lava so that there is 2 loops
-    #
-    #     for y in range(self.height):
-    #         for x in range(self.width):
-    #             for obj in self.grid[y][x]:
-    #                 if isinstance(obj, Water) :
-    #                     for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
-    #                         nx, ny = x + dx, y + dy
-    #                         if 0 <= nx < self.width and 0 <= ny < self.height:
-    #                             target_layers = new_grid[ny][nx]
-    #
-    #                             if any(isinstance(layer, (Wall, Block, NumericBlock)) for layer in target_layers):
-    #                                 continue
-    #
-    #                             if any(isinstance(layer, Lava) for layer in target_layers):
-    #                                 new_grid[ny][nx] = [layer for layer in target_layers if not isinstance(layer, Lava)]
-    #                                 new_grid[ny][nx].append(Wall(nx, ny))
-    #                             elif not any(isinstance(layer, (Water)) for layer in target_layers):
-    #                                 new_grid[ny][nx].append(Water(nx, ny))
-    #
-    #     last_grid = [[list(new_grid[y][x]) for x in range(self.width)] for y in range(self.height)]
-    #     for y in range(self.height):
-    #         for x in range(self.width):
-    #             for obj in new_grid[y][x]:
-    #                 if isinstance(obj, Lava) :
-    #                     for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
-    #                         nx, ny = x + dx, y + dy
-    #                         if 0 <= nx < self.width and 0 <= ny < self.height:
-    #                             target_layers = last_grid[ny][nx]
-    #
-    #                             if any(isinstance(layer, (Wall, Block, NumericBlock)) for layer in target_layers):
-    #                                 continue
-    #
-    #                             if any(isinstance(layer, Water) for layer in target_layers):
-    #                                 last_grid[ny][nx] = [layer for layer in target_layers if
-    #                                                      not isinstance(layer, Water)]
-    #                                 last_grid[ny][nx].append(Wall(nx, ny))
-    #                             elif not any(isinstance(layer, (Lava)) for layer in target_layers):
-    #                                 last_grid[ny][nx].append(Lava(nx, ny))
-    #
-    #     self.grid = last_grid
+
     def updatelavandwater(self):
-
-        new_grid = [[list(self.grid[y][x]) for x in range(self.width)] for y in range(self.height)]
+        directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+        new_water = [[False] * self.width for _ in range(self.height)]
+        new_lava = [[False] * self.width for _ in range(self.height)]
+        for y in range(self.height):
+            for x in range(self.width):
+                cell = self.grid[y][x]
+                if not new_water[y][x] and any(isinstance(obj, Water) for obj in cell):
+                    for dx, dy in directions:
+                        nx, ny = x + dx, y + dy
+                        if 0 <= nx < self.width and 0 <= ny < self.height:
+                            target_cell = self.grid[ny][nx]
+                            if any(isinstance(l, (Wall, Block, NumericBlock, Water)) for l in target_cell):
+                                continue
+                            if any(isinstance(l, Lava) for l in target_cell):
+                                target_cell[:] = [obj for obj in target_cell if not isinstance(obj, (Water, Lava))]
+                                target_cell.append(Wall(nx, ny))
+                                self.num_of_lava-=1
+                            else:
+                                target_cell.append(Water(nx, ny))
+                                new_water[ny][nx] = True
 
         for y in range(self.height):
             for x in range(self.width):
-                for obj in self.grid[y][x]:
-                    if isinstance(obj, Water):
-                        for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
-                            nx, ny = x + dx, y + dy
-                            if 0 <= nx < self.width and 0 <= ny < self.height:
-
-                                target_layers = new_grid[ny][nx]
-
-                                if any(isinstance(l, (Wall, Block, NumericBlock)) for l in target_layers):
-                                    continue
-
-                                if any(isinstance(l, Lava) for l in target_layers):
-                                    new_grid[ny][nx] = [l for l in target_layers if not isinstance(l, Lava)]
-                                    new_grid[ny][nx].append(Wall(nx, ny))
-                                elif not any(isinstance(l, Water) for l in target_layers):
-                                    new_grid[ny][nx].append(Water(nx, ny))
-
-        last_grid = [[list(new_grid[y][x]) for x in range(self.width)] for y in range(self.height)]
-
-        for y in range(self.height):
-            for x in range(self.width):
-                for obj in new_grid[y][x]:
-                    if isinstance(obj, Lava):
-                        for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
-                            nx, ny = x + dx, y + dy
-                            if 0 <= nx < self.width and 0 <= ny < self.height:
-
-                                target_layers = last_grid[ny][nx]
-
-                                if any(isinstance(l, (Wall, Block, NumericBlock)) for l in target_layers):
-                                    continue
-
-                                if any(isinstance(l, Water) for l in target_layers):
-                                    last_grid[ny][nx] = [l for l in target_layers if not isinstance(l, Water)]
-                                    last_grid[ny][nx].append(Wall(nx, ny))
-                                elif not any(isinstance(l, Lava) for l in target_layers):
-                                    last_grid[ny][nx].append(Lava(nx, ny))
-
-        self.grid = last_grid
+                cell = self.grid[y][x]
+                if not new_lava[y][x] and any(isinstance(obj, Lava) for obj in cell):
+                    for dx, dy in directions:
+                        nx, ny = x + dx, y + dy
+                        if 0 <= nx < self.width and 0 <= ny < self.height:
+                            target_cell = self.grid[ny][nx]
+                            if any(isinstance(l, (Wall, Block, NumericBlock, Lava)) for l in target_cell):
+                                continue
+                            if any(isinstance(l, Water) for l in target_cell) and new_water[ny][nx]:
+                                target_cell[:] = [obj for obj in target_cell if not isinstance(obj, (Water, Lava))]
+                                target_cell.append(Wall(nx, ny))
+                                self.num_of_lava-=1
+                            else:
+                                target_cell.append(Lava(nx, ny))
+                                self.num_of_lava+=1
+                                new_lava[ny][nx] = True
 
     def check_can_move(self, direction):
-
 
         dx, dy =direction
         new_x, new_y = self.player.x + dx, self.player.y + dy
@@ -320,10 +263,8 @@ class Board:
 
         target_layers = self.get_object_at(new_x, new_y)
 
-
-        if any(isinstance(obj, (Wall, Tube, NumericBlock)) for obj in target_layers):
+        if any(isinstance(obj, (Wall, Tube, NumericBlock,Lava)) for obj in target_layers):
             return False
-
 
         block_to_push = None
         for obj in target_layers:
@@ -347,12 +288,11 @@ class Board:
         moves = []
 
         directions = {
-            (1, 0): "Right",
+
             (0, -1): "Up",
             (0, 1): "Down",
             (-1, 0): "Left",
-
-
+            (1, 0): "Right",
         }
 
         for direction, name in directions.items():
@@ -362,14 +302,12 @@ class Board:
         return moves
 
     type_map = {
-
         Wall: 0,
         Block: 1,
         Water: 2,
         Lava: 3,
         NumericBlock: 4,
         Key: 5,
-
     }
 
 
@@ -385,15 +323,16 @@ class Board:
                         continue
                     type_id = Board.type_map[t]
                     value = getattr(obj, "value", 0)
-                    object_code = (type_id << 6) | value
-                    cell_value ^= object_code
+                    object_code = (type_id << 5) | value
+                    cell_value |= object_code
                 h.update(pack_u32(cell_value))
         h.update(pack_u16(self.player.x))
         h.update(pack_u16(self.player.y))
 
         return h.hexdigest()
 
-
+    def __lt__(self, other):
+        return  self.num_of_lava < other.num_of_lava
 
 
 

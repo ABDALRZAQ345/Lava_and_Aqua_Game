@@ -7,9 +7,9 @@ from Pygame.Resource import Resource
 class Goal(GameObject):
     image = None
     keys_left=None
+    layer = 3
     def __init__(self, x, y,keys=0):
         super().__init__(x, y)
-        self.layer=3
         self.keys_left= keys!=0
         if Goal.image is None:
             Goal.image = pygame.image.load(Resource.path("images/goal.png")).convert_alpha()

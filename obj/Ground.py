@@ -6,9 +6,10 @@ from Pygame.Resource import Resource
 
 class Ground(GameObject):
     image = None
+    layer = 0
     def __init__(self, x, y):
         super().__init__(x, y)
-        self.layer = 0
+
         if Ground.image is None:
             Ground.image = pygame.image.load(Resource.path("images/ground.png")).convert_alpha()
 

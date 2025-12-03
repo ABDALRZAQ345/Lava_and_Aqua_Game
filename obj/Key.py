@@ -2,10 +2,11 @@ import pygame
 from Pygame.GameObject import GameObject
 
 class Key(GameObject):
+    layer = 6
+    color = (200, 160, 200)
+
     def __init__(self, x, y):
         super().__init__(x, y)
-        self.layer=6
-        self.color = (200, 160, 200)
 
     def draw(self, screen, tile_size, offset=(0, 0)):
         offset_x, offset_y = offset

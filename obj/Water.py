@@ -6,10 +6,10 @@ from Pygame.Resource import Resource
 
 class Water(GameObject):
     image =None
-
+    layer = 1
     def __init__(self, x, y):
         super().__init__(x, y)
-        self.layer=1
+
         if Water.image is None:
             Water.image =  pygame.image.load(Resource.path("images/water.png")).convert_alpha()
 

@@ -5,10 +5,10 @@ from Pygame.Resource import Resource
 
 class Wall(GameObject):
     image = None
-
+    layer=5
     def __init__(self, x, y):
         super().__init__(x, y)
-        self.layer=5
+
         if Wall.image is None:
             Wall.image = pygame.image.load(Resource.path("images/wall.png")).convert_alpha()
 

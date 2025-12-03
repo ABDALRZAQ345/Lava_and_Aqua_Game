@@ -5,9 +5,10 @@ from obj.Ground import Ground
 
 
 class NumericBlock(GameObject):
+    layer = 2
     def __init__(self, x, y,value):
         super().__init__(x, y)
-        self.layer=2
+
         self.value = value
 
     def draw(self, screen, tile_size, offset=(0, 0)):

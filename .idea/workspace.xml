@@ -4,10 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e3f607e8-f190-4913-9b87-a3d056fd016d" name="Changes" comment="algorithm">
+    <list default="true" id="e3f607e8-f190-4913-9b87-a3d056fd016d" name="Changes" comment="finish dfs and bfs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game.py" beforeDir="false" afterPath="$PROJECT_DIR$/Game.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Board.py" beforeDir="false" afterPath="$PROJECT_DIR$/Board.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/Loader.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Solver.py" beforeDir="false" afterPath="$PROJECT_DIR$/Solver.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Block.py" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Block.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Goal.py" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Goal.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Ground.py" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Ground.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Key.py" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Key.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/NumericBlock.py" beforeDir="false" afterPath="$PROJECT_DIR$/obj/NumericBlock.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Player.py" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Player.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Tube.py" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Tube.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Wall.py" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Wall.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Water.py" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Water.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/lava.py" beforeDir="false" afterPath="$PROJECT_DIR$/obj/lava.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,6 +67,7 @@
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;Python.Board.executor&quot;: &quot;Run&quot;,
     &quot;Python.Game.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Loader.executor&quot;: &quot;Run&quot;,
     &quot;Python.Solver.executor&quot;: &quot;Run&quot;,
     &quot;Python.main.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
@@ -163,7 +176,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764447617164</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="finish dfs and bfs">
+      <option name="closed" value="true" />
+      <created>1764490457898</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1764490457898</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -171,6 +192,7 @@
     <MESSAGE value="Merge remote-tracking branch 'origin/master'" />
     <MESSAGE value="delete unwanted files" />
     <MESSAGE value="algorithm" />
-    <option name="LAST_COMMIT_MESSAGE" value="algorithm" />
+    <MESSAGE value="finish dfs and bfs" />
+    <option name="LAST_COMMIT_MESSAGE" value="finish dfs and bfs" />
   </component>
 </project>
