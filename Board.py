@@ -49,33 +49,50 @@ class Board:
         new_board.num_of_lava = self.num_of_lava
         new_grid = [[[] for _ in range(self.width)] for _ in range(self.height)]
 
+        grid = self.grid
+        Wall_t = Wall
+        Ground_t = Ground
+        Lava_t = Lava
+        Water_t = Water
+        Block_t = Block
+        Tube_t = Tube
+        NumericBlock_t = NumericBlock
+        Key_t = Key
+        Player_t = Player
+        Goal_t = Goal
+
         for y in range(self.height):
+            row_src = grid[y]
+            row_dst = new_grid[y]
             for x in range(self.width):
-                for obj in self.grid[y][x]:
-                    if isinstance(obj, Wall):
-                        new_obj = Wall(x, y)
-                    elif isinstance(obj, Ground):
-                        new_obj = Ground(x, y)
-                    elif isinstance(obj, Lava):
-                        new_obj = Lava(x, y)
-                    elif isinstance(obj, Water):
-                        new_obj = Water(x, y)
-                    elif isinstance(obj, Block):
-                        new_obj = Block(x, y)
-                    elif isinstance(obj, Tube):
-                        new_obj = Tube(x, y)
-                    elif isinstance(obj, NumericBlock):
-                        new_obj = NumericBlock(x, y, obj.value)
-                    elif isinstance(obj, Key):
-                        new_obj = Key(x, y)
-                    elif isinstance(obj, Player):
-                        new_obj = Player(x, y)
-                    elif isinstance(obj, Goal):
+                cell_src = row_src[x]
+                cell_dst = row_dst[x]
+                for obj in cell_src:
+                    t = type(obj)
+                    if t is Wall_t:
+                        new_obj = Wall_t(x, y)
+                    elif t is Ground_t:
+                        new_obj = Ground_t(x, y)
+                    elif t is Lava_t:
+                        new_obj = Lava_t(x, y)
+                    elif t is Water_t:
+                        new_obj = Water_t(x, y)
+                    elif t is Block_t:
+                        new_obj = Block_t(x, y)
+                    elif t is Tube_t:
+                        new_obj = Tube_t(x, y)
+                    elif t is NumericBlock_t:
+                        new_obj = NumericBlock_t(x, y, obj.value)
+                    elif t is Key_t:
+                        new_obj = Key_t(x, y)
+                    elif t is Player_t:
+                        new_obj = Player_t(x, y)
+                    elif t is Goal_t:
                         new_obj = new_board.goal
                     else:
-                        new_obj = Ground(x, y)
+                        new_obj = Ground_t(x, y)
 
-                    new_grid[y][x].append(new_obj)
+                    cell_dst.append(new_obj)
 
         new_board.grid = new_grid
         return new_board
@@ -283,6 +300,8 @@ class Board:
                 return False
 
         return True
+    def distanceToGoal(self):
+        return abs(self.player.x-self.goal.x) + abs(self.player.y - self.goal.y)
 
     def get_available_moves(self):
         moves = []
@@ -298,8 +317,34 @@ class Board:
         for direction, name in directions.items():
             if self.check_can_move(direction):
                 moves.append((direction, name))
+                
 
+            moves.append((direction, name))
+       
         return moves
+    def get_sorted_available_moves(self):
+        moves = []
+
+        directions = {
+            (0, -1): "Up",
+            (0, 1): "Down",
+            (-1, 0): "Left",
+            (1, 0): "Right",
+        }
+
+        for (dx, dy), name in directions.items():
+            if self.check_can_move((dx, dy)):
+                new_x = self.player.x + dx
+                new_y = self.player.y + dy
+
+                dist = abs(new_x - self.goal.x) + abs(new_y - self.goal.y)
+
+                moves.append(((dx, dy), name, dist))
+
+        moves.sort(key=lambda m: m[2])
+
+        return [(m[0], m[1]) for m in moves]
+
 
     type_map = {
         Wall: 0,
@@ -314,16 +359,23 @@ class Board:
     def hashed(self):
         h = xxhash.xxh64()
 
-        for row in self.grid:
+        grid = self.grid
+        type_map = Board.type_map
+        Ground_t = Ground
+        Tube_t = Tube
+        Player_t = Player
+        Goal_t = Goal
+
+        for row in grid:
             for cell in row:
                 cell_value = 0
                 for obj in cell:
                     t = type(obj)
-                    if t in {Ground, Tube, Player, Goal}:
+                    if t in (Ground_t, Tube_t, Player_t, Goal_t,Wall):
                         continue
-                    type_id = Board.type_map[t]
+                    type_id = type_map[t]
                     value = getattr(obj, "value", 0)
-                    object_code = (type_id << 5) | value
+                    object_code = (type_id << 5) ^ value
                     cell_value |= object_code
                 h.update(pack_u32(cell_value))
         h.update(pack_u16(self.player.x))

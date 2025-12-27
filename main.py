@@ -169,7 +169,7 @@ def level_selection_loop():
 #   Play Level
 # =====================================================================
 def algorithm_selection_loop():
-    options = ["dfs", "bfs","ucs","play"]
+    options = ["dfs", "bfs","ucs","hill_climb","Astar","play"]
     selected_index = 0
 
     while True:
